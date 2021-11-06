@@ -7,6 +7,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "receipts")
@@ -19,7 +20,8 @@ public class Receipt {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
-    //TODO: receipt code
+    @Column(columnDefinition = "text", nullable = false)
+    private String receiptCode = UUID.randomUUID().toString();
 
     @ManyToOne
     @JoinColumn(name = "supplier_id")
