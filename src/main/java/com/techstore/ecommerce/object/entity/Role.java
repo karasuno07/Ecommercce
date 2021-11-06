@@ -21,7 +21,7 @@ public class Role implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private long id;
 
     @Column(columnDefinition = "varchar(50)", nullable = false)
     private String name;
