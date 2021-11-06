@@ -1,10 +1,17 @@
-package com.techstore.ecommercce.entity;
+package com.techstore.ecommercce.object.entity;
 
+
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name="customers")
+@Table(name = "customers")
+@Getter
+@Setter
+@ToString
 public class Customer {
 
     @Id
@@ -22,6 +29,9 @@ public class Customer {
 
     private boolean gender;
 
+    @Temporal(TemporalType.DATE)
+    private Date dateOfBirth;
+
     @Column(columnDefinition = "varchar(12)")
     private String phoneNumber;
 
@@ -31,7 +41,12 @@ public class Customer {
     @Column(columnDefinition = "varchar(200)")
     private String address;
 
+    @Column(columnDefinition = "text")
+    private String image;
+
     private boolean active;
 
-    private String image;
+    @ToString.Exclude
+    @OneToMany(mappedBy = "customer")
+    private List<ProductReview> reviews;
 }

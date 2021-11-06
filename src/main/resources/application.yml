@@ -1,0 +1,11 @@
+spring:
+  main:
+    banner-mode: off
+  datasource:
+    username: techstore
+    password: 123456
+    url: jdbc:postgresql://localhost:5432/techstore_ecommerce
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+    hibernate:
+      ddl-auto: update
