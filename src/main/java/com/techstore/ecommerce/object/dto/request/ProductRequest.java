@@ -14,9 +14,6 @@ public class ProductRequest {
     @NotBlank(message = "blank")
     private String name;
 
-    @NotBlank(message = "blank")
-    private String slug;
-
     @JsonProperty("category_id")
     @NotNull(message = "null")
     private int categoryId;
@@ -24,6 +21,9 @@ public class ProductRequest {
     @JsonProperty("brand_id")
     @NotNull(message = "null")
     private int brandId;
+
+    @JsonProperty("is_default")
+    private boolean isDefault;
 
     @NotEmpty(message = "empty")
     private List<ProductDetailRequest> details;

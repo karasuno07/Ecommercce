@@ -31,13 +31,13 @@ public class Product {
     private Brand brand;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<ProductDetail> details;
-
-    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "category_id", columnDefinition = "bigint", nullable = false)
     private Category category;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProductDetail> details;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "product")

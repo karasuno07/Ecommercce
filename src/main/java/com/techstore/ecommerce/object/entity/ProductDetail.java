@@ -40,6 +40,8 @@ public class ProductDetail {
     @Column(columnDefinition = "jsonb", nullable = false)
     private String descriptions;
 
+    private boolean isDefault = false;
+
     @Type(type = "list-array")
     @Column(columnDefinition = "text[]", nullable = false)
     private List<String> images;

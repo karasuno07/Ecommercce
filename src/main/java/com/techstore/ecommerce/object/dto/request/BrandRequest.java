@@ -10,6 +10,4 @@ public class BrandRequest {
     @NotBlank(message = "blank")
     private String name;
 
-    @NotBlank(message = "blank")
-    private String slug;
 }
