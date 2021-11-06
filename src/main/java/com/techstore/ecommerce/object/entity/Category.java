@@ -27,7 +27,7 @@ public class Category {
     @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "parent_id")
-    private Category parentCategory;
+    private Category parent;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)

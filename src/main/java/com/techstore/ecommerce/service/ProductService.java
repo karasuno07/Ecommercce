@@ -25,6 +25,7 @@ public class ProductService {
 
     private final ProductRepository productRepo;
     private final ProductMapper productMapper;
+    private final ProductDetailMapper productDetailMapper;
 
     private final BrandService brandService;
     private final CategoryService categoryService;
@@ -46,6 +47,10 @@ public class ProductService {
         product.setBrand(brand);
         Category category = categoryService.findCategoryById(request.getCategoryId());
         product.setCategory(category);
+        List<ProductDetail> details = request.getDetails().stream()
+                                             .map(productDetailMapper::createEntityFromRequest)
+                                             .collect(Collectors.toList());
+        product.setDetails(details);
 
         return productRepo.save(product);
     }
@@ -59,6 +64,10 @@ public class ProductService {
         product.setBrand(brand);
         Category category = categoryService.findCategoryById(request.getCategoryId());
         product.setCategory(category);
+        List<ProductDetail> details = request.getDetails().stream()
+                                             .map(productDetailMapper::createEntityFromRequest)
+                                             .collect(Collectors.toList());
+        product.setDetails(details);
 
         return productRepo.save(product);
     }

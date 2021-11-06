@@ -19,6 +19,9 @@ public class Brand {
     @Column(columnDefinition = "varchar(50)", nullable = false)
     private String name;
 
+    @Column(columnDefinition = "varchar(50)", nullable = false)
+    private String slug;
+
     @ToString.Exclude
     @OneToMany(mappedBy = "brand")
     private List<Product> products;
