@@ -2,7 +2,7 @@ package com.techstore.ecommerce.object.mapper;
 
 import com.techstore.ecommerce.object.dto.request.ProductRequest;
 import com.techstore.ecommerce.object.dto.response.ProductResponse;
-import com.techstore.ecommerce.object.entity.Product;
+import com.techstore.ecommerce.object.entity.jpa.Product;
 import com.techstore.ecommerce.util.CustomStringUtil;
 import org.mapstruct.*;
 

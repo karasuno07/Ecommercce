@@ -2,6 +2,7 @@ package com.techstore.ecommerce.object.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.techstore.ecommerce.object.model.AuthenticationInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

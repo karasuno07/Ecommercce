@@ -1,17 +1,9 @@
 package com.techstore.ecommerce.object.mapper;
 
-import com.techstore.ecommerce.object.dto.request.OrderRequest;
-import com.techstore.ecommerce.object.dto.request.ProductDetailRequest;
-import com.techstore.ecommerce.object.dto.request.ProductReviewRequest;
 import com.techstore.ecommerce.object.dto.request.SupplierRequest;
-import com.techstore.ecommerce.object.dto.response.ProductReviewResponse;
 import com.techstore.ecommerce.object.dto.response.SupplierResponse;
-import com.techstore.ecommerce.object.entity.Order;
-import com.techstore.ecommerce.object.entity.ProductDetail;
-import com.techstore.ecommerce.object.entity.ProductReview;
-import com.techstore.ecommerce.object.entity.Supplier;
+import com.techstore.ecommerce.object.entity.jpa.Supplier;
 import com.techstore.ecommerce.object.model.Address;
-import com.techstore.ecommerce.object.model.FullName;
 import org.mapstruct.*;
 
 @Mapper(componentModel = "spring",

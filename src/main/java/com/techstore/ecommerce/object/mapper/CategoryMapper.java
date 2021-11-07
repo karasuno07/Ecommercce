@@ -2,7 +2,7 @@ package com.techstore.ecommerce.object.mapper;
 
 import com.techstore.ecommerce.object.dto.request.CategoryRequest;
 import com.techstore.ecommerce.object.dto.response.CategoryResponse;
-import com.techstore.ecommerce.object.entity.Category;
+import com.techstore.ecommerce.object.entity.jpa.Category;
 import com.techstore.ecommerce.util.CustomStringUtil;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;

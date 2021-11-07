@@ -1,6 +1,6 @@
 package com.techstore.ecommerce.object.mapper;
 
-import com.techstore.ecommerce.object.entity.Role;
+import com.techstore.ecommerce.object.entity.jpa.Role;
 import com.techstore.ecommerce.object.dto.request.RoleRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;

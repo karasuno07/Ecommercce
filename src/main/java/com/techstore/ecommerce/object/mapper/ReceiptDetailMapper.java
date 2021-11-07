@@ -1,11 +1,8 @@
 package com.techstore.ecommerce.object.mapper;
 
 import com.techstore.ecommerce.object.dto.request.ReceiptDetailRequest;
-import com.techstore.ecommerce.object.dto.request.ReceiptRequest;
 import com.techstore.ecommerce.object.dto.response.ReceiptDetailResponse;
-import com.techstore.ecommerce.object.dto.response.ReceiptResponse;
-import com.techstore.ecommerce.object.entity.Receipt;
-import com.techstore.ecommerce.object.entity.ReceiptDetail;
+import com.techstore.ecommerce.object.entity.jpa.ReceiptDetail;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;

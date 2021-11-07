@@ -1,6 +1,6 @@
 package com.techstore.ecommerce.object.mapper;
 
-import com.techstore.ecommerce.object.entity.User;
+import com.techstore.ecommerce.object.entity.jpa.User;
 import com.techstore.ecommerce.object.model.Address;
 import com.techstore.ecommerce.object.model.AuthenticationInfo;
 import com.techstore.ecommerce.object.model.FullName;
