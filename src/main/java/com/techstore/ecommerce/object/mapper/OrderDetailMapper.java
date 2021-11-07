@@ -1,6 +1,6 @@
 package com.techstore.ecommerce.object.mapper;
 
-import com.techstore.ecommerce.object.entity.OrderDetail;
+import com.techstore.ecommerce.object.entity.jpa.OrderDetail;
 import com.techstore.ecommerce.object.dto.request.OrderDetailRequest;
 import com.techstore.ecommerce.object.dto.response.OrderDetailResponse;
 import org.mapstruct.Mapper;

@@ -1,6 +1,6 @@
 package com.techstore.ecommerce.object.mapper;
 
-import com.techstore.ecommerce.object.entity.ProductReview;
+import com.techstore.ecommerce.object.entity.jpa.ProductReview;
 import com.techstore.ecommerce.object.dto.request.ProductReviewRequest;
 import com.techstore.ecommerce.object.dto.response.ProductReviewResponse;
 import org.mapstruct.Mapper;

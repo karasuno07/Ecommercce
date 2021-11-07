@@ -12,6 +12,11 @@ public class AuthenticationInfo {
 
     private String username;
 
+    @JsonProperty("full_name")
+    private String fullName;
+
+    private String image;
+
     @JsonProperty("role")
     private String roleName;
 

@@ -1,7 +1,7 @@
 package com.techstore.ecommerce.repository.jpa.spec;
 
 import com.techstore.ecommerce.object.dto.filter.UserFilter;
-import com.techstore.ecommerce.object.entity.User;
+import com.techstore.ecommerce.object.entity.jpa.User;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.ObjectUtils;
 

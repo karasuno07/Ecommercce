@@ -3,7 +3,7 @@ package com.techstore.ecommerce.service;
 import com.techstore.ecommerce.exception.ResourceNotFoundException;
 import com.techstore.ecommerce.object.dto.filter.UserFilter;
 import com.techstore.ecommerce.object.dto.request.UserRequest;
-import com.techstore.ecommerce.object.entity.User;
+import com.techstore.ecommerce.object.entity.jpa.User;
 import com.techstore.ecommerce.object.mapper.UserMapper;
 import com.techstore.ecommerce.repository.jpa.UserRepository;
 import com.techstore.ecommerce.repository.jpa.spec.UserSpec;

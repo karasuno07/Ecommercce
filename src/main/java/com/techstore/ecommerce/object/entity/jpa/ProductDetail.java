@@ -1,4 +1,4 @@
-package com.techstore.ecommerce.object.entity;
+package com.techstore.ecommerce.object.entity.jpa;
 
 import com.vladmihalcea.hibernate.type.array.ListArrayType;
 import lombok.Getter;

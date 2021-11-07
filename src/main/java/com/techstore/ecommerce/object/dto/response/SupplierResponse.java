@@ -1,6 +1,6 @@
 package com.techstore.ecommerce.object.dto.response;
 
-import com.techstore.ecommerce.object.entity.Receipt;
+import com.techstore.ecommerce.object.entity.jpa.Receipt;
 import lombok.Data;
 
 import java.util.List;

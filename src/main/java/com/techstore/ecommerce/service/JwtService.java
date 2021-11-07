@@ -7,7 +7,9 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.impl.JWTParser;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.Payload;
-import com.techstore.ecommerce.object.entity.User;
+import com.techstore.ecommerce.object.entity.cache.RefreshToken;
+import com.techstore.ecommerce.object.entity.jpa.User;
+import com.techstore.ecommerce.object.mapper.UserMapper;
 import com.techstore.ecommerce.object.model.AuthenticationInfo;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +26,6 @@ public class JwtService {
 
     @Value("${com.tech-store.jwt.secret:3618bf61-a667-4139-ac23-4267323e6217}")
     private String jwtSecret;
-
     @Value("${com.tech-store.jwt.expiration:300000}")
     private long jwtExpiration; // 300000ms = 5 minutes as default
 
@@ -68,5 +69,18 @@ public class JwtService {
             log.error("VALIDATE TOKEN FAILED: " + ex.getMessage());
             return false;
         }
+    }
+
+    public RefreshToken generateRefreshToken(User user) {
+        RefreshToken refreshToken = new RefreshToken();
+        refreshToken.setToken(UUID.randomUUID().toString());
+        refreshToken.setUser(user);
+
+        // TODO: save token to redis database
+        return refreshToken;
+    }
+
+    public RefreshToken verifyExpiration(String refreshToken) {
+        return null;
     }
 }

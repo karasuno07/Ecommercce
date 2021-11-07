@@ -9,6 +9,10 @@ public class SuccessResponse<S> extends AbstractResponse {
 
     private final S data;
 
+    public SuccessResponse(S data) {
+        this.data = data;
+    }
+
     public SuccessResponse(int responseCode, S data) {
         super(responseCode);
         this.data = data;

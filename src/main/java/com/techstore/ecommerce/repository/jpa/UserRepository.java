@@ -1,6 +1,6 @@
 package com.techstore.ecommerce.repository.jpa;
 
-import com.techstore.ecommerce.object.entity.User;
+import com.techstore.ecommerce.object.entity.jpa.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
