@@ -2,7 +2,7 @@ package com.techstore.ecommerce.service;
 
 import com.techstore.ecommerce.exception.ResourceNotFoundException;
 import com.techstore.ecommerce.object.dto.request.SupplierRequest;
-import com.techstore.ecommerce.object.entity.Supplier;
+import com.techstore.ecommerce.object.entity.jpa.Supplier;
 import com.techstore.ecommerce.object.mapper.SupplierMapper;
 import com.techstore.ecommerce.repository.jpa.SupplierRepository;
 import lombok.RequiredArgsConstructor;
