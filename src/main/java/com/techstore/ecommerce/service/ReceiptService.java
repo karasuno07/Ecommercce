@@ -3,8 +3,8 @@ package com.techstore.ecommerce.service;
 import com.techstore.ecommerce.exception.ResourceNotFoundException;
 import com.techstore.ecommerce.object.dto.filter.ReceiptFilter;
 import com.techstore.ecommerce.object.dto.request.ReceiptRequest;
-import com.techstore.ecommerce.object.entity.Receipt;
-import com.techstore.ecommerce.object.entity.ReceiptDetail;
+import com.techstore.ecommerce.object.entity.jpa.Receipt;
+import com.techstore.ecommerce.object.entity.jpa.ReceiptDetail;
 import com.techstore.ecommerce.object.mapper.ReceiptDetailMapper;
 import com.techstore.ecommerce.object.mapper.ReceiptMapper;
 import com.techstore.ecommerce.repository.jpa.ReceiptRepository;
@@ -24,7 +24,7 @@ public class ReceiptService {
     private final ReceiptMapper receiptMapper;
     private final ReceiptDetailMapper receiptDetailMapper;
 
-    public Page<Receipt> findAllReceipt(ReceiptFilter filter){
+    public Page<Receipt> findAllReceipt(ReceiptFilter filter) {
         Specification<Receipt> specification = ReceiptSpec.getSpecification(filter);
         return receiptRepo.findAll(specification, filter.getPagination().getPageAndSort());
     }
@@ -38,8 +38,8 @@ public class ReceiptService {
         Receipt receipt = receiptMapper.createEntityFromRequest(request);
 
         List<ReceiptDetail> details = request.getDetails().stream()
-                .map(receiptDetailMapper::createEntityFromRequest)
-                .collect(Collectors.toList());
+                                             .map(receiptDetailMapper::createEntityFromRequest)
+                                             .collect(Collectors.toList());
         receipt.setDetails(details);
 
         return receiptRepo.save(receipt);
@@ -51,8 +51,8 @@ public class ReceiptService {
         receiptMapper.update(receipt, request);
 
         List<ReceiptDetail> details = request.getDetails().stream()
-                .map(receiptDetailMapper::createEntityFromRequest)
-                .collect(Collectors.toList());
+                                             .map(receiptDetailMapper::createEntityFromRequest)
+                                             .collect(Collectors.toList());
         receipt.setDetails(details);
 
         return receiptRepo.save(receipt);

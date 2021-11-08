@@ -1,9 +1,11 @@
 package com.techstore.ecommerce.service;
 
 import com.techstore.ecommerce.exception.ResourceNotFoundException;
+import com.techstore.ecommerce.object.constant.OrderStatus;
 import com.techstore.ecommerce.object.dto.filter.OrderFilter;
 import com.techstore.ecommerce.object.dto.request.OrderRequest;
-import com.techstore.ecommerce.object.entity.*;
+import com.techstore.ecommerce.object.entity.jpa.Order;
+import com.techstore.ecommerce.object.entity.jpa.OrderDetail;
 import com.techstore.ecommerce.object.mapper.OrderDetailMapper;
 import com.techstore.ecommerce.object.mapper.OrderMapper;
 import com.techstore.ecommerce.repository.jpa.OrderRepository;
@@ -23,7 +25,7 @@ public class OrderService {
     private final OrderMapper orderMapper;
     private final OrderDetailMapper orderDetailMapper;
 
-    public Page<Order> findAllOrder(OrderFilter filter){
+    public Page<Order> findAllOrder(OrderFilter filter) {
         Specification<Order> specification = OrderSpec.getSpecification(filter);
         return orderRepo.findAll(specification, filter.getPagination().getPageAndSort());
     }
@@ -37,25 +39,25 @@ public class OrderService {
         Order order = orderMapper.createEntityFromRequest(request);
 
         List<OrderDetail> details = request.getDetails().stream()
-                .map(orderDetailMapper::createEntityFromRequest)
-                .collect(Collectors.toList());
+                                           .map(orderDetailMapper::createEntityFromRequest)
+                                           .collect(Collectors.toList());
         order.setDetails(details);
+        order.setStatus(OrderStatus.PENDING.getStatus());
 
         return orderRepo.save(order);
     }
 
-    public Order updateOrder(long id, OrderRequest request) {
+    public void deleteOrder(long id) {
         Order order = findOrderById(id);
-
-        orderMapper.update(order, request);
-
-        List<OrderDetail> details = request.getDetails().stream()
-                .map(orderDetailMapper::createEntityFromRequest)
-                .collect(Collectors.toList());
-        order.setDetails(details);
-
-        return orderRepo.save(order);
+        if (order.getStatus().equals(OrderStatus.PENDING.getStatus())) {
+            orderRepo.delete(order);
+        } else {
+            // TODO: tạo exception class để throw
+        }
     }
+
+    // TODO: xác nhận đơn hàng (từ phía nhân viên)
+    // TODO:
 
 
 }
