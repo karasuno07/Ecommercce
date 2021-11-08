@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityExistsException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,34 +43,34 @@ public class ProductService {
 
     public Product createProduct(ProductRequest request) {
         Product product = productMapper.createEntityFromRequest(request);
+        existingProduct(product);
+        return saveProduct(product, request);
+    }
 
+    public Product updateProduct(long id, ProductRequest request) {
+        Product product = findProductById(id);
+        productMapper.update(product, request);
+        return saveProduct(product, request);
+    }
+
+    public Product saveProduct(Product product,ProductRequest request){
         Brand brand = brandService.findBrandById(request.getBrandId());
         product.setBrand(brand);
         Category category = categoryService.findCategoryById(request.getCategoryId());
         product.setCategory(category);
         List<ProductDetail> details = request.getDetails().stream()
-                                             .map(productDetailMapper::createEntityFromRequest)
-                                             .collect(Collectors.toList());
+                .map(productDetailMapper::createEntityFromRequest)
+                .collect(Collectors.toList());
         product.setDetails(details);
 
         return productRepo.save(product);
     }
 
-    public Product updateProduct(long id, ProductRequest request) {
-        Product product = findProductById(id);
-
-        productMapper.update(product, request);
-
-        Brand brand = brandService.findBrandById(request.getBrandId());
-        product.setBrand(brand);
-        Category category = categoryService.findCategoryById(request.getCategoryId());
-        product.setCategory(category);
-        List<ProductDetail> details = request.getDetails().stream()
-                                             .map(productDetailMapper::createEntityFromRequest)
-                                             .collect(Collectors.toList());
-        product.setDetails(details);
-
-        return productRepo.save(product);
+    public void existingProduct(Product product){
+        boolean existing = productRepo.existsByName(product.getName());
+        if(existing){
+            throw new EntityExistsException("Product name "+product.getName()+" already exists");
+        }
     }
 
     public void activateProduct(long id) {

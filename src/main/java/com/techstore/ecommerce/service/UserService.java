@@ -37,10 +37,7 @@ public class UserService implements UserDetailsService {
     public User createUser(UserRequest request) {
         User user = userMapper.createEntityFromRequest(request);
 
-        boolean existing = userRepo.existsByUsername(user.getUsername());
-        if (existing) {
-            throw new EntityExistsException("Username " + user.getUsername() + "already exists");
-        }
+        existingUser(user);
 
         // TODO: save image from multipart file
 
@@ -51,11 +48,7 @@ public class UserService implements UserDetailsService {
         User user = findUserById(id);
         userMapper.update(user, request);
 
-        boolean existing = userRepo.existsByUsername(user.getUsername());
-        if (existing) {
-            throw new EntityExistsException("Username " + user.getUsername() + "already exists");
-        }
-
+        existingUser(user);
         // TODO: save image from multipart file
 
         return userRepo.save(user);
@@ -71,6 +64,23 @@ public class UserService implements UserDetailsService {
         User user = findUserById(id);
         user.setActive(false);
         userRepo.save(user);
+    }
+
+    public void existingUser(User user){
+        boolean existing = userRepo.existsByUsername(user.getUsername());
+        if (existing) {
+            throw new EntityExistsException("Username " + user.getUsername() + " already exists");
+        }
+
+        existing = userRepo.existsByEmail(user.getEmail());
+        if(existing){
+            throw new EntityExistsException("Email " + user.getEmail() + " already exists");
+        }
+
+        existing = userRepo.existsByPhoneNumber(user.getPhoneNumber());
+        if(existing){
+            throw new EntityExistsException("Phone number " + user.getPhoneNumber() + " already exists");
+        }
     }
 
     @Override

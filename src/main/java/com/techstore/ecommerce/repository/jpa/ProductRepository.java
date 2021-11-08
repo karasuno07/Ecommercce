@@ -13,4 +13,6 @@ public interface ProductRepository extends
     @Query("SELECT o FROM Product o LEFT JOIN FETCH o.details AS d "
             + "WHERE o.id = ?1 AND d.isDefault = true")
     Optional<Product> findDefaultProductById(Long id);
+
+    boolean existsByName(String name);
 }

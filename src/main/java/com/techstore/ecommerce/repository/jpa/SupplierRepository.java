@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface SupplierRepository extends
         JpaRepository<Supplier, Long>, JpaSpecificationExecutor<Supplier> {
+    boolean existsByName(String name);
 }

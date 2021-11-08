@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface BrandRepository extends
         JpaRepository<Brand, Long>, JpaSpecificationExecutor<Brand> {
+    boolean existsByName(String name);
 }
