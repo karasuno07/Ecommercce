@@ -1,7 +1,7 @@
 package com.techstore.ecommerce.service;
 
 import com.techstore.ecommerce.exception.ResourceNotFoundException;
-import com.techstore.ecommerce.object.entity.Category;
+import com.techstore.ecommerce.object.entity.jpa.Category;
 import com.techstore.ecommerce.repository.jpa.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
