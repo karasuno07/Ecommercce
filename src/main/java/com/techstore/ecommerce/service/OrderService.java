@@ -56,8 +56,11 @@ public class OrderService {
         }
     }
 
-    // TODO: xác nhận đơn hàng (từ phía nhân viên)
-    // TODO:
-
+    // xác nhận đơn hàng (từ phía nhân viên)
+    public void deliveryOrder(long id,OrderStatus status){
+        Order order = findOrderById(id);
+        order.setStatus(status.getStatus());
+        orderRepo.save(order);
+    }
 
 }
