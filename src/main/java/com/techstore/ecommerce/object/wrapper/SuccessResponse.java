@@ -9,12 +9,14 @@ public class SuccessResponse<S> extends AbstractResponse {
 
     private final S data;
 
-    public SuccessResponse(S data) {
+    public SuccessResponse(S data, String message) {
+        super(message);
         this.data = data;
     }
 
-    public SuccessResponse(int responseCode, S data) {
-        super(responseCode);
+    public SuccessResponse(int responseCode, S data, String message) {
+        super(responseCode, message);
         this.data = data;
     }
+
 }

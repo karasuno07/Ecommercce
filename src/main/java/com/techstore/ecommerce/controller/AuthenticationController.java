@@ -42,7 +42,7 @@ public class AuthenticationController {
 
         TokenResponse response = new TokenResponse(accessToken, refreshToken.getToken(),
                                                    mapper.toResponseModel(user));
-        return new SuccessResponse<>(response);
+        return new SuccessResponse<>(response, "Login successfully");
     }
 
     @PostMapping("/refresh-token/{token}")
@@ -55,6 +55,6 @@ public class AuthenticationController {
         TokenResponse response = new TokenResponse(newAccessToken,
                                                    refreshToken.getToken(), userInfo);
 
-        return new SuccessResponse<>(response);
+        return new SuccessResponse<>(response, "Get token successfully");
     }
 }

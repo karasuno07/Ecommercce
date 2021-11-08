@@ -17,7 +17,7 @@ public class BrandService {
   private final BrandRepository brandRepo;
   private final BrandMapper brandMapper;
 
-  public List<Brand> findAllBrand(){
+  public List<Brand> findAllBrands(){
     return brandRepo.findAll();
   }
 

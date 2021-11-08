@@ -21,6 +21,10 @@ public abstract class AbstractResponse {
         this.responseCode = responseCode;
     }
 
+    public AbstractResponse(String message) {
+        this.message = message;
+    }
+
     public AbstractResponse(int responseCode, String message) {
         this.responseCode = responseCode;
         this.message = message;

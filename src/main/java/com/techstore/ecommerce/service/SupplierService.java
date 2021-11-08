@@ -18,7 +18,7 @@ public class SupplierService {
     private final SupplierRepository supplierRepo;
     private final SupplierMapper supplierMapper;
 
-    public List<Supplier> findAllBrand(){
+    public List<Supplier> findAllSuppliers(){
         return supplierRepo.findAll();
     }
 
