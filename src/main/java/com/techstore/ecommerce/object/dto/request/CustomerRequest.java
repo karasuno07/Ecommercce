@@ -8,7 +8,6 @@ import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -41,7 +40,7 @@ public class CustomerRequest {
     @NotNull(message = "null")
     private Address address;
 
-    @NotNull(message = "null")
-    @NotSupportedImageType(messages = "invalid content type")
+    //    @NotNull(message = "null")
+    @NotSupportedImageType(message = "invalid content type")
     private MultipartFile image;
 }

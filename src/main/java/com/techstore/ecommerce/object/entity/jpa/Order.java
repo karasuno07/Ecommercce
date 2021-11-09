@@ -55,5 +55,5 @@ public class Order {
     @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "customer_id", columnDefinition = "bigint")
-    private Customer customer;
+    private User user;
 }

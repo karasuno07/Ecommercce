@@ -17,9 +17,9 @@ public class ProductReviewRequest {
     @NotBlank(message = "blank")
     private String comment;
 
-    @JsonProperty("customer_id")
+    @JsonProperty("user_id")
     @NotNull(message = "null")
-    private int customerId;
+    private int userId;
 
     @JsonProperty("product_id")
     @NotNull(message = "null")

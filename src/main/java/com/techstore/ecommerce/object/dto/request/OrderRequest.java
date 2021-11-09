@@ -13,6 +13,9 @@ import java.util.List;
 @Data
 public class OrderRequest {
 
+    @JsonProperty("user_id")
+    private long userId;
+
     @JsonProperty("full_name")
     @NotNull(message = "null")
     private FullName recipientName;

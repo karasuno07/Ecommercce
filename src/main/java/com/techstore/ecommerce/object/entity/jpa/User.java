@@ -8,9 +8,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @ToString
-public class User implements Serializable, UserDetails {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -55,12 +56,24 @@ public class User implements Serializable, UserDetails {
     @Column(nullable = false)
     private boolean active = true;
 
+    @ToString.Exclude
+    @OneToMany(mappedBy = "user")
+    private List<ProductReview> reviews;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
+
     @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
+    @JoinColumn(name = "role_id")
     private Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (role.getName() == null) {
+            return Collections.singleton(new SimpleGrantedAuthority("ROLE_CUSTOMER"));
+        }
+
         return role.getAuthorities().stream()
                    .map(authority -> new SimpleGrantedAuthority(authority.toUpperCase()))
                    .collect(Collectors.toSet());

@@ -10,7 +10,7 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE, ElementType.FIELD, ElementType.ANNOTATION_TYPE})
 public @interface NotSupportedImageType {
 
-    String messages() default "Invalid image file";
+    String message() default "Invalid image file";
 
     Class<?>[] groups() default {};
 

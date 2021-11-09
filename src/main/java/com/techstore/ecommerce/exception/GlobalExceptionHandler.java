@@ -4,6 +4,7 @@ import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.techstore.ecommerce.object.wrapper.ErrorResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.ServletException;
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,12 +45,11 @@ public class GlobalExceptionHandler {
         exception
                 .getBindingResult()
                 .getAllErrors()
-                .forEach(
-                        (error) -> {
-                            String fieldName = ((FieldError) error).getField();
-                            String errorMessage = error.getDefaultMessage();
-                            errors.put(fieldName, errorMessage);
-                        });
+                .forEach((error) -> {
+                    String fieldName = ((FieldError) error).getField();
+                    String errorMessage = error.getDefaultMessage();
+                    errors.put(fieldName, errorMessage);
+                });
 
         ErrorResponse response = new ErrorResponse();
         response.setResponseCode(HttpStatus.BAD_REQUEST.value());
@@ -101,6 +102,26 @@ public class GlobalExceptionHandler {
                 : exception.getMessage());
 
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(SQLException.class)
+    public ResponseEntity<ErrorResponse> handleSQLException(SQLException exception) {
+        ErrorResponse response = new ErrorResponse();
+
+        response.setResponseCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        response.setMessage(exception.getMessage());
+
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ErrorResponse> handleConstraintException(ConstraintViolationException exception) {
+        ErrorResponse response = new ErrorResponse();
+
+        response.setResponseCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        response.setMessage(exception.getMessage());
+
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(ServletException.class)

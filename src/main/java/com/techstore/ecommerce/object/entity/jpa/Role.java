@@ -27,6 +27,6 @@ public class Role implements Serializable {
     private String name;
 
     @Type(type = "list-array")
-    @Column(columnDefinition = "text[]", nullable = false)
+    @Column(columnDefinition = "text[]")
     private List<String> authorities;
 }

@@ -1,5 +1,6 @@
 package com.techstore.ecommerce.object.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.techstore.ecommerce.object.model.Address;
 import com.techstore.ecommerce.object.model.FullName;
@@ -28,6 +29,8 @@ public class UserRequest {
     private boolean gender;
 
     @JsonProperty("date_of_birth")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @NotNull(message = "null")
     private Date dateOfBirth;
 
     @JsonProperty("phone_number")
@@ -40,8 +43,8 @@ public class UserRequest {
     @NotNull(message = "null")
     private Address address;
 
-    @NotNull(message = "null")
-    @NotSupportedImageType(messages = "invalid content type")
+    //    @NotNull(message = "null")
+    @NotSupportedImageType(message = "invalid content type")
     private MultipartFile image;
 
     @JsonProperty("role_id")

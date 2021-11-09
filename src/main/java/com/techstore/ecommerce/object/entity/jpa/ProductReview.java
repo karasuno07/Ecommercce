@@ -28,7 +28,7 @@ public class ProductReview {
     @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    private Customer customer;
+    private User user;
 
     @ToString.Exclude
     @ManyToOne

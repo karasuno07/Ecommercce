@@ -53,23 +53,23 @@ public class ProductService {
         return saveProduct(product, request);
     }
 
-    public Product saveProduct(Product product,ProductRequest request){
+    public Product saveProduct(Product product, ProductRequest request) {
         Brand brand = brandService.findBrandById(request.getBrandId());
         product.setBrand(brand);
         Category category = categoryService.findCategoryById(request.getCategoryId());
         product.setCategory(category);
         List<ProductDetail> details = request.getDetails().stream()
-                .map(productDetailMapper::createEntityFromRequest)
-                .collect(Collectors.toList());
+                                             .map(productDetailMapper::createEntityFromRequest)
+                                             .collect(Collectors.toList());
         product.setDetails(details);
 
         return productRepo.save(product);
     }
 
-    public void existingProduct(Product product){
+    public void existingProduct(Product product) {
         boolean existing = productRepo.existsByName(product.getName());
-        if(existing){
-            throw new EntityExistsException("Product name "+product.getName()+" already exists");
+        if (existing) {
+            throw new EntityExistsException("Product name " + product.getName() + " already exists");
         }
     }
 

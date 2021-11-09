@@ -4,20 +4,24 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.impl.JWTParser;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.Payload;
 import com.techstore.ecommerce.object.entity.cache.RefreshToken;
 import com.techstore.ecommerce.object.entity.jpa.User;
-import com.techstore.ecommerce.object.mapper.UserMapper;
 import com.techstore.ecommerce.object.model.AuthenticationInfo;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.redisson.api.RMapCache;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @Log4j2
@@ -29,10 +33,22 @@ public class JwtService {
     @Value("${com.tech-store.jwt.expiration:300000}")
     private long jwtExpiration; // 300000ms = 5 minutes as default
 
+    private final RedissonClient redissonClient;
+
+    private RMapCache<String, Long> userIdMap;
+    private RMapCache<Long, User> tokenMap;
+    private final TimeUnit timeUnit = TimeUnit.HOURS;
+
+    @PostConstruct
+    public void init() {
+        userIdMap = redissonClient.getMapCache("USER_ID_MAP");
+        tokenMap = redissonClient.getMapCache("REFRESH_TOKEN_MAP");
+    }
+
     public String generateAccessToken(@NonNull User user) {
         Map<String, Object> payload = new HashMap<>();
         payload.put("id", user.getId());
-        payload.put("username", user.getPassword());
+        payload.put("username", user.getUsername());
         payload.put("role", user.getRole().getName());
         payload.put("permissions", user.getRole().getAuthorities());
 
@@ -54,7 +70,7 @@ public class JwtService {
         authInfo.setId(claims.get("id").asInt());
         authInfo.setUsername(claims.get("username").asString());
         authInfo.setRoleName(claims.get("role").asString());
-        authInfo.setPermissions(claims.get("authorities").asList(String.class));
+        authInfo.setPermissions(claims.get("permissions").asList(String.class));
 
         return authInfo;
     }
@@ -77,10 +93,20 @@ public class JwtService {
         refreshToken.setUser(user);
 
         // TODO: save token to redis database
+        userIdMap.fastPut(refreshToken.getToken(), user.getId(), 6, timeUnit);
+        tokenMap.fastPut(user.getId(), user, 6, timeUnit);
+
         return refreshToken;
     }
 
-    public RefreshToken verifyExpiration(String refreshToken) {
-        return null;
+    public RefreshToken verifyExpiration(String token) {
+        if (userIdMap.remainTimeToLive(token) > 0) {
+            Long userId = userIdMap.get(token);
+            User user = tokenMap.get(userId);
+
+            return generateRefreshToken(user);
+        } else {
+            throw new TokenExpiredException("Refresh token has been expired");
+        }
     }
 }

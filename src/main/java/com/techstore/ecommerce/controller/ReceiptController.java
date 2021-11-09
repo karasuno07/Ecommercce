@@ -9,6 +9,7 @@ import com.techstore.ecommerce.object.wrapper.SuccessResponse;
 import com.techstore.ecommerce.service.ReceiptService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,6 +20,7 @@ public class ReceiptController {
     private final ReceiptService service;
     private final ReceiptMapper mapper;
 
+    @PreAuthorize("hasAuthority('RECEIPT_READ')")
     @GetMapping
     AbstractResponse getAllReceipts(@RequestBody ReceiptFilter filter) {
         Page<ReceiptResponse> response = service.findAllReceipt(filter)
@@ -27,6 +29,7 @@ public class ReceiptController {
         return new SuccessResponse<>(response, null);
     }
 
+    @PreAuthorize("hasAuthority('RECEIPT_READ')")
     @GetMapping("/{receiptId}")
     AbstractResponse getReceiptById(@PathVariable long receiptId) {
         ReceiptResponse response = mapper.toResponseModel(service.findReceiptById(receiptId));
@@ -34,6 +37,7 @@ public class ReceiptController {
         return new SuccessResponse<>(response, null);
     }
 
+    @PreAuthorize("hasAuthority('RECEIPT_CREATE')")
     @PostMapping
     AbstractResponse createReceipt(@RequestBody ReceiptRequest request) {
         ReceiptResponse response = mapper.toResponseModel(service.createReceipt(request));
@@ -41,6 +45,7 @@ public class ReceiptController {
         return new SuccessResponse<>(response, null);
     }
 
+    @PreAuthorize("hasAuthority('RECEIPT_UPDATE')")
     @PutMapping("/{receiptId}")
     AbstractResponse updateReceipt(@PathVariable long receiptId,
                                    @RequestBody ReceiptRequest request) {
