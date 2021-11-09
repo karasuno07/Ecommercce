@@ -47,6 +47,13 @@ public enum SuccessMessage {
     UPDATE_SUPPLIER("Updated supplier successfully"),
     DELETE_SUPPLIER("Delete supplier successfully"),
 
+    //ORDER
+    FIND_ALL_ORDERS("Get all orders successfully"),
+    FIND_ORDER_BY_ID("Found a order with id "),
+    CREATE_ORDER("Created order Successfully"),
+    DELETE_ORDER("Delete order successfully"),
+    UPDATE_STATUS("Updated status ")
+
     ;
 
     private final String message;
