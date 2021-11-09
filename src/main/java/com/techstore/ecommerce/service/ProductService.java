@@ -43,17 +43,18 @@ public class ProductService {
 
     public Product createProduct(ProductRequest request) {
         Product product = productMapper.createEntityFromRequest(request);
-        existingProduct(product);
+        validateProduct(product);
         return saveProduct(product, request);
     }
 
     public Product updateProduct(long id, ProductRequest request) {
         Product product = findProductById(id);
         productMapper.update(product, request);
+        validateProduct(product);
         return saveProduct(product, request);
     }
 
-    public Product saveProduct(Product product, ProductRequest request) {
+    private Product saveProduct(Product product, ProductRequest request) {
         Brand brand = brandService.findBrandById(request.getBrandId());
         product.setBrand(brand);
         Category category = categoryService.findCategoryById(request.getCategoryId());
@@ -66,7 +67,7 @@ public class ProductService {
         return productRepo.save(product);
     }
 
-    public void existingProduct(Product product) {
+    public void validateProduct(Product product) {
         boolean existing = productRepo.existsByName(product.getName());
         if (existing) {
             throw new EntityExistsException("Product name " + product.getName() + " already exists");
