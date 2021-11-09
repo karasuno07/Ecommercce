@@ -25,7 +25,7 @@ public class OrderService {
     private final OrderMapper orderMapper;
     private final OrderDetailMapper orderDetailMapper;
 
-    public Page<Order> findAllOrder(OrderFilter filter) {
+    public Page<Order> findAllOrders(OrderFilter filter) {
         Specification<Order> specification = OrderSpec.getSpecification(filter);
         return orderRepo.findAll(specification, filter.getPagination().getPageAndSort());
     }
