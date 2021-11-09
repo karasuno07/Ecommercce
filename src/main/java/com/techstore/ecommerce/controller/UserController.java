@@ -47,7 +47,7 @@ public class UserController {
         return new SuccessResponse<>(valid, null);
     }
 
-    @PreAuthorize("hasAuthority('USER_CREATE')")
+//    @PreAuthorize("hasAuthority('USER_CREATE')")
     @PostMapping
     AbstractResponse createUser(@RequestBody @Valid UserRequest request) {
         UserResponse response = mapper.toResponseModel(service.createUser(request));
@@ -55,7 +55,7 @@ public class UserController {
                 response, HttpStatus.CREATED.value(), SuccessMessage.CREATE_USER.getMessage());
     }
 
-    @PreAuthorize("hasAuthority('USER_UPDATE')")
+    @PreAuthorize("hasAuthority('USER_UPDATE') OR hasRole('CUSTOMER')")
     @PutMapping("/{userId}")
     AbstractResponse updateUser(@PathVariable int userId, @RequestBody @Valid UserRequest request) {
         UserResponse response = mapper.toResponseModel(service.updateUser(userId, request));
