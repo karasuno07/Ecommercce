@@ -22,6 +22,9 @@ public class Brand {
     @Column(columnDefinition = "varchar(50)", nullable = false)
     private String slug;
 
+    @Column(columnDefinition = "text", nullable = false)
+    private String image;
+
     @ToString.Exclude
     @OneToMany(mappedBy = "brand")
     private List<Product> products;

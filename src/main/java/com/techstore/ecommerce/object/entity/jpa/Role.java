@@ -1,6 +1,6 @@
 package com.techstore.ecommerce.object.entity.jpa;
 
-import com.vladmihalcea.hibernate.type.array.StringArrayType;
+import com.vladmihalcea.hibernate.type.array.ListArrayType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,14 +9,14 @@ import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "roles")
 @Getter
 @Setter
 @ToString
-@TypeDef(name = "string-array", typeClass = StringArrayType.class)
+@TypeDef(name = "list-array", typeClass = ListArrayType.class)
 public class Role implements Serializable {
 
     @Id
@@ -26,7 +26,7 @@ public class Role implements Serializable {
     @Column(columnDefinition = "varchar(50)", nullable = false)
     private String name;
 
-    @Type(type = "string-array")
+    @Type(type = "list-array")
     @Column(columnDefinition = "text[]", nullable = false)
-    private Set<String> authorities;
+    private List<String> authorities;
 }

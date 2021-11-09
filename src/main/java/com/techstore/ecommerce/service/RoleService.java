@@ -11,8 +11,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -55,6 +55,7 @@ public class RoleService {
     }
 
     private void getAuthorities(Role role, RoleRequest request) {
+        if (ObjectUtils.isEmpty(role.getAuthorities())) role.setAuthorities(new ArrayList<>());
         if (!ObjectUtils.isEmpty(request.getAuthorities())) {
             Set<String> set = request.getAuthorities().stream()
                                      .filter(this::isValidAuthority)
@@ -65,9 +66,12 @@ public class RoleService {
     }
 
     private boolean isValidAuthority(String value) {
-        return Arrays.stream(Authorities.values())
-                     .anyMatch(e -> e.getPermission().equalsIgnoreCase(value));
+        boolean valid = Arrays.stream(Authorities.values())
+                              .anyMatch(e -> e.getPermission().equalsIgnoreCase(value));
+        if (!valid) {
+            throw new ResourceNotFoundException("Invalid Permission");
+        } else {
+            return true;
+        }
     }
-
-
 }
