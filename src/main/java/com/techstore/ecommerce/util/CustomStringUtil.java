@@ -10,7 +10,7 @@ public final class CustomStringUtil {
         return s.toLowerCase().replaceAll("\\s", "-");
     }
 
-    public static String removeAccent(String s) {
+    private static String removeAccent(String s) {
         String temp = Normalizer.normalize(s, Normalizer.Form.NFD);
         Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
         return pattern.matcher(temp).replaceAll("");

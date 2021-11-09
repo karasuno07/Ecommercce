@@ -19,47 +19,43 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/categories")
 @RequiredArgsConstructor
 public class CategoryController {
-  private final CategoryService service;
-  private final CategoryMapper mapper;
+    private final CategoryService service;
+    private final CategoryMapper mapper;
 
-  @GetMapping
-  AbstractResponse getAllCategory() {
-    List<CategoryResponse> response =
-        service.findAllCategorys().stream()
-            .map(mapper::toResponseModel)
-            .collect(Collectors.toList());
+    @GetMapping
+    AbstractResponse getAllCategory() {
+        List<CategoryResponse> response =
+                service.findAllCategorys().stream()
+                       .map(mapper::toResponseModel)
+                       .collect(Collectors.toList());
 
-    if (response.isEmpty()) {
-      return new SuccessResponse<>(
-          HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.getReasonPhrase());
+        return new SuccessResponse<>(response, SuccessMessage.FIND_ALL_CATEGORIES.getMessage());
     }
-    return new SuccessResponse<>(response, SuccessMessage.FIND_ALL_CATEGORY.getMessage());
-  }
 
-  @GetMapping("/{categoryId}")
-  AbstractResponse getCategoryById(@PathVariable int categoryId) {
-    CategoryResponse response = mapper.toResponseModel(service.findCategoryById(categoryId));
-    return new SuccessResponse<>(
-        response, SuccessMessage.FIND_CATEGORY_BY_ID.getMessage() + categoryId);
-  }
+    @GetMapping("/{categoryId}")
+    AbstractResponse getCategoryById(@PathVariable int categoryId) {
+        CategoryResponse response = mapper.toResponseModel(service.findCategoryById(categoryId));
+        return new SuccessResponse<>(
+                response, SuccessMessage.FIND_CATEGORY_BY_ID.getMessage() + categoryId);
+    }
 
-  @PostMapping
-  AbstractResponse createCategory(@RequestBody @Valid CategoryRequest request) {
-    CategoryResponse response = mapper.toResponseModel(service.createCategory(request));
-    return new SuccessResponse<>(
-        HttpStatus.CREATED.value(), response, SuccessMessage.CREATE_CATEGORY.getMessage());
-  }
+    @PostMapping
+    AbstractResponse createCategory(@RequestBody @Valid CategoryRequest request) {
+        CategoryResponse response = mapper.toResponseModel(service.createCategory(request));
+        return new SuccessResponse<>(
+                response, HttpStatus.CREATED.value(), SuccessMessage.CREATE_CATEGORY.getMessage());
+    }
 
-  @PutMapping("/{categoryId}")
-  AbstractResponse updateCategory(
-      @PathVariable int categoryId, @RequestBody @Valid CategoryRequest request) {
-    CategoryResponse response = mapper.toResponseModel(service.updateCategory(categoryId, request));
-    return new SuccessResponse<>(response, SuccessMessage.UPDATE_CATEGORY.getMessage());
-  }
+    @PutMapping("/{categoryId}")
+    AbstractResponse updateCategory(
+            @PathVariable int categoryId, @RequestBody @Valid CategoryRequest request) {
+        CategoryResponse response = mapper.toResponseModel(service.updateCategory(categoryId, request));
+        return new SuccessResponse<>(response, SuccessMessage.UPDATE_CATEGORY.getMessage());
+    }
 
-  @DeleteMapping("/{categoryId}")
-  AbstractResponse deleteCategory(@PathVariable long categoryId) {
-    service.deleteCategory(categoryId);
-    return new SuccessResponse<>(null, SuccessMessage.DELETE_CATEGORY.getMessage());
-  }
+    @DeleteMapping("/{categoryId}")
+    AbstractResponse deleteCategory(@PathVariable long categoryId) {
+        service.deleteCategory(categoryId);
+        return new SuccessResponse<>(null, SuccessMessage.DELETE_CATEGORY.getMessage());
+    }
 }

@@ -14,7 +14,7 @@ public class SuccessResponse<S> extends AbstractResponse {
         this.data = data;
     }
 
-    public SuccessResponse(int responseCode, S data, String message) {
+    public SuccessResponse(S data, int responseCode, String message) {
         super(responseCode, message);
         this.data = data;
     }

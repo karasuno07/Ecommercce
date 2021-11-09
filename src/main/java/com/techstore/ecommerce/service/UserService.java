@@ -37,7 +37,7 @@ public class UserService implements UserDetailsService {
     public User createUser(UserRequest request) {
         User user = userMapper.createEntityFromRequest(request);
 
-        existingUser(user);
+        validateUser(user);
 
         // TODO: save image from multipart file
 
@@ -48,7 +48,7 @@ public class UserService implements UserDetailsService {
         User user = findUserById(id);
         userMapper.update(user, request);
 
-        existingUser(user);
+        validateUser(user);
         // TODO: save image from multipart file
 
         return userRepo.save(user);
@@ -66,19 +66,16 @@ public class UserService implements UserDetailsService {
         userRepo.save(user);
     }
 
-    public void existingUser(User user){
-        boolean existing = userRepo.existsByUsername(user.getUsername());
-        if (existing) {
+    public void validateUser(User user) {
+        if (userRepo.existsByUsername(user.getUsername())) {
             throw new EntityExistsException("Username " + user.getUsername() + " already exists");
         }
 
-        existing = userRepo.existsByEmail(user.getEmail());
-        if(existing){
+        if (userRepo.existsByEmail(user.getEmail())) {
             throw new EntityExistsException("Email " + user.getEmail() + " already exists");
         }
 
-        existing = userRepo.existsByPhoneNumber(user.getPhoneNumber());
-        if(existing){
+        if (userRepo.existsByPhoneNumber(user.getPhoneNumber())) {
             throw new EntityExistsException("Phone number " + user.getPhoneNumber() + " already exists");
         }
     }

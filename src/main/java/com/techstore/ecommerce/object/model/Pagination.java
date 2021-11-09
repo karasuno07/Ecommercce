@@ -2,11 +2,13 @@ package com.techstore.ecommerce.object.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 @Data
+@NoArgsConstructor
 public class Pagination {
 
     @JsonProperty("page")

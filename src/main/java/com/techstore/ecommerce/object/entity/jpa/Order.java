@@ -39,6 +39,12 @@ public class Order {
     @Column(columnDefinition = "varchar(200)", nullable = false)
     private String address;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastShippingDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastReceiveDate;
+
     @Column(columnDefinition = "varchar(20)", nullable = false)
     private String status;
 

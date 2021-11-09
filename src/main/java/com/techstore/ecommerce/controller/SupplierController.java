@@ -19,47 +19,43 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/suppliers")
 @RequiredArgsConstructor
 public class SupplierController {
-  private final SupplierService service;
-  private final SupplierMapper mapper;
+    private final SupplierService service;
+    private final SupplierMapper mapper;
 
-  @GetMapping
-  AbstractResponse getAllSupplier() {
-    List<SupplierResponse> response =
-        service.findAllSuppliers().stream()
-            .map(mapper::toResponseModel)
-            .collect(Collectors.toList());
+    @GetMapping
+    AbstractResponse getAllSupplier() {
+        List<SupplierResponse> response =
+                service.findAllSuppliers().stream()
+                       .map(mapper::toResponseModel)
+                       .collect(Collectors.toList());
 
-    if (response.isEmpty()) {
-      return new SuccessResponse<>(
-          HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.getReasonPhrase());
+        return new SuccessResponse<>(response, SuccessMessage.FIND_ALL_SUPPLIERS.getMessage());
     }
-    return new SuccessResponse<>(response, SuccessMessage.FIND_ALL_SUPPLIER.getMessage());
-  }
 
-  @GetMapping("/{supplierId}")
-  AbstractResponse getSupplierById(@PathVariable int supplierId) {
-    SupplierResponse response = mapper.toResponseModel(service.findSupplierById(supplierId));
-    return new SuccessResponse<>(
-        response, SuccessMessage.FIND_SUPPLIER_BY_ID.getMessage() + supplierId);
-  }
+    @GetMapping("/{supplierId}")
+    AbstractResponse getSupplierById(@PathVariable int supplierId) {
+        SupplierResponse response = mapper.toResponseModel(service.findSupplierById(supplierId));
+        return new SuccessResponse<>(
+                response, SuccessMessage.FIND_SUPPLIER_BY_ID.getMessage() + supplierId);
+    }
 
-  @PostMapping
-  AbstractResponse createSupplier(@RequestBody @Valid SupplierRequest request) {
-    SupplierResponse response = mapper.toResponseModel(service.createSupplier(request));
-    return new SuccessResponse<>(
-        HttpStatus.CREATED.value(), response, SuccessMessage.CREATE_SUPPLIER.getMessage());
-  }
+    @PostMapping
+    AbstractResponse createSupplier(@RequestBody @Valid SupplierRequest request) {
+        SupplierResponse response = mapper.toResponseModel(service.createSupplier(request));
+        return new SuccessResponse<>(
+                response, HttpStatus.CREATED.value(), SuccessMessage.CREATE_SUPPLIER.getMessage());
+    }
 
-  @PutMapping("/{supplierId}")
-  AbstractResponse updateSupplier(
-      @PathVariable int supplierId, @RequestBody @Valid SupplierRequest request) {
-    SupplierResponse response = mapper.toResponseModel(service.updateSupplier(supplierId, request));
-    return new SuccessResponse<>(response, SuccessMessage.UPDATE_SUPPLIER.getMessage());
-  }
+    @PutMapping("/{supplierId}")
+    AbstractResponse updateSupplier(
+            @PathVariable int supplierId, @RequestBody @Valid SupplierRequest request) {
+        SupplierResponse response = mapper.toResponseModel(service.updateSupplier(supplierId, request));
+        return new SuccessResponse<>(response, SuccessMessage.UPDATE_SUPPLIER.getMessage());
+    }
 
-  @DeleteMapping("/{supplierId}")
-  AbstractResponse deleteSupplier(@PathVariable long supplierId) {
-    service.deleteSupplier(supplierId);
-    return new SuccessResponse<>(null, SuccessMessage.DELETE_SUPPLIER.getMessage());
-  }
+    @DeleteMapping("/{supplierId}")
+    AbstractResponse deleteSupplier(@PathVariable long supplierId) {
+        service.deleteSupplier(supplierId);
+        return new SuccessResponse<>(null, SuccessMessage.DELETE_SUPPLIER.getMessage());
+    }
 }
