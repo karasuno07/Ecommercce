@@ -9,3 +9,8 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQL94Dialect
     hibernate:
       ddl-auto: update
+## Firebase Cloud
+firebase:
+  project-id: 'fit-territory-318516'
+  bucket-name: TECHSTORE_IMAGE_BUCKET
+  image-url: 'https://storage.googleapis.com/${firebase.bucket-name}/%s'

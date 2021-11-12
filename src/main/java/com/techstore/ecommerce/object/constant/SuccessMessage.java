@@ -6,7 +6,7 @@ public enum SuccessMessage {
     FIND_USER_BY_ID("Found a user with id "),
     FIND_USER_BY_USERNAME("Found a user with username "),
     CREATE_USER("Created user Successfully"),
-    UPDATE_USER("User updated successfully"),
+    UPDATE_USER("UserES updated successfully"),
     ACTIVATE_USER("Activate user successfully"),
     DEACTIVATE_USER("Deactivate user successfully"),
 
