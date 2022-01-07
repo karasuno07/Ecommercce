@@ -1,7 +1,6 @@
 package com.techstore.ecommerce.exception;
 
-public class
-ResourceNotFoundException extends RuntimeException {
+public class ResourceNotFoundException extends RuntimeException {
 
   public ResourceNotFoundException() {}
 

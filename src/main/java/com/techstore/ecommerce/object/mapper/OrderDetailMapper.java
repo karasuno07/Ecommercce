@@ -12,9 +12,6 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface OrderDetailMapper {
 
-    @Mapping(target = "productName", expression = "java(detail.getProduct().getName())")
-    @Mapping(target = "productCategory", expression = "java(detail.getProduct().getCategory().getName())")
-    @Mapping(target = "productBrand", expression = "java(detail.getProduct().getBrand().getName())")
     OrderDetailResponse toResponseModel(OrderDetail detail);
 
     OrderDetail createEntityFromRequest(OrderDetailRequest request);

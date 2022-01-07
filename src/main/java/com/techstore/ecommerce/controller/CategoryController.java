@@ -27,7 +27,7 @@ public class CategoryController {
     @GetMapping
     AbstractResponse getAllCategory() {
         List<CategoryResponse> response =
-                service.findAllCategorys().stream()
+                service.findAllCategories().stream()
                        .map(mapper::toResponseModel)
                        .collect(Collectors.toList());
 

@@ -76,13 +76,13 @@ public class ProductService {
 
     public void activateProduct(long id) {
         Product product = findProductById(id);
-        product.setActive(true);
+        product.setAvailable(true);
         productRepo.save(product);
     }
 
     public void deactivateProduct(long id) {
         Product product = findProductById(id);
-        product.setActive(false);
+        product.setAvailable(false);
         productRepo.save(product);
     }
 

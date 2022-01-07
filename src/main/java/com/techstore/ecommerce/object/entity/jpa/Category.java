@@ -25,6 +25,13 @@ public class Category {
     private String slug;
 
     @ToString.Exclude
+    @ManyToMany
+    @JoinTable(name = "categories_brands",
+            joinColumns = @JoinColumn(name = "brand_id", columnDefinition = "bigint"),
+            inverseJoinColumns = @JoinColumn(name = "category_id", columnDefinition = "bigint"))
+    private List<Brand> brands;
+
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "parent_id")
     private Category parent;

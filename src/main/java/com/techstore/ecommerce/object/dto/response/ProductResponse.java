@@ -24,4 +24,6 @@ public class ProductResponse {
     private List<ProductDetailResponse> details;
 
     private List<ProductReviewResponse> reviews;
+
+    private boolean available;
 }

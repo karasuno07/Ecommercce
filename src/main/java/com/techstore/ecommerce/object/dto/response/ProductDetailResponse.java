@@ -17,10 +17,6 @@ public class ProductDetailResponse {
 
     private BigDecimal discount;
 
-    private String size;
-
-    private String color;
-
     private Map<String, String> descriptions;
 
     private List<String> images;

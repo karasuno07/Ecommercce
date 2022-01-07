@@ -23,7 +23,7 @@ public class Product {
     private String slug;
 
     @Column(nullable = false)
-    private boolean active = true;
+    private boolean available = true;
 
     @ToString.Exclude
     @ManyToOne

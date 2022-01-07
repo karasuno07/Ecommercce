@@ -18,7 +18,7 @@ public class CategoryService {
     private final CategoryRepository categoryRepo;
     private final CategoryMapper categoryMapper;
 
-    public List<Category> findAllCategorys(){
+    public List<Category> findAllCategories(){
         return categoryRepo.findAll();
     }
 

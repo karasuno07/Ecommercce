@@ -31,12 +31,6 @@ public class ProductDetail {
     @Column(nullable = false)
     private BigDecimal discount;
 
-    @Column(columnDefinition = "varchar(20)", nullable = false)
-    private String size;
-
-    @Column(columnDefinition = "varchar(30)", nullable = false)
-    private String color;
-
     @Column(columnDefinition = "jsonb", nullable = false)
     private String descriptions;
 

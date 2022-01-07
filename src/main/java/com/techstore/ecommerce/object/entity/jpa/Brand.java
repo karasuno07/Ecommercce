@@ -1,6 +1,8 @@
 package com.techstore.ecommerce.object.entity.jpa;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -24,6 +26,12 @@ public class Brand {
 
     @Column(columnDefinition = "text", nullable = false)
     private String image;
+
+    @ManyToMany
+    @JoinTable(name = "categories_brands",
+            joinColumns = @JoinColumn(name = "category_id", columnDefinition = "bigint"),
+            inverseJoinColumns = @JoinColumn(name = "brand_id", columnDefinition = "bigint"))
+    private List<Category> categories;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "brand")

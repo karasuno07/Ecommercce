@@ -28,12 +28,6 @@ public class ProductDetailRequest {
     @NotNull(message = "null")
     private BigDecimal discount;
 
-    @NotBlank(message = "blank")
-    private String size;
-
-    @NotBlank(message = "blank")
-    private String color;
-
     @NotEmpty(message = "empty")
     private Map<String, String> descriptions;
 
