@@ -2,7 +2,6 @@ package com.techstore.ecommerce.object.mapper;
 
 import com.techstore.ecommerce.object.dto.request.UserRequest;
 import com.techstore.ecommerce.object.dto.response.UserResponse;
-import com.techstore.ecommerce.object.entity.es.UserES;
 import com.techstore.ecommerce.object.entity.jpa.User;
 import com.techstore.ecommerce.object.model.Address;
 import com.techstore.ecommerce.object.model.AuthenticationInfo;
@@ -15,10 +14,6 @@ public interface UserMapper {
 
     @Mapping(target = "roleName", expression = "java(user.getRole().getName())")
     UserResponse toResponseModel(User user);
-
-    UserES jpaToEsEntity(User user);
-
-    User esToJpaEntity(UserES userES);
 
     @Mapping(target = "roleName", expression = "java(user.getRole().getName())")
     @Mapping(target = "permissions",

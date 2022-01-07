@@ -12,6 +12,7 @@ import com.techstore.ecommerce.object.mapper.OrderMapper;
 import com.techstore.ecommerce.repository.jpa.OrderRepository;
 import com.techstore.ecommerce.repository.jpa.spec.OrderSpec;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import org.springframework.util.ObjectUtils;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Log4j2
 @Service
 @RequiredArgsConstructor
 public class OrderService {
@@ -30,9 +32,14 @@ public class OrderService {
     private final UserService userService;
 
     public Page<Order> findAllOrders(OrderFilter filter) {
+
+        Page<Order> orders;
         Specification<Order> specification = OrderSpec.getSpecification(filter);
-        return orderRepo.findAll(specification, filter.getPagination().getPageAndSort());
+        orders = orderRepo.findAll(specification, filter.getPagination().getPageAndSort());
+        log.info("USE DB: " + orders);
+        return orders;
     }
+
 
     public Order findOrderById(long id) {
         return orderRepo.findById(id).orElseThrow(

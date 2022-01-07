@@ -40,8 +40,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 Collection<? extends GrantedAuthority> authorities =
                         user.getRoleName().equals("CUSTOMER")
-                        ? Collections.singleton(
-                                new SimpleGrantedAuthority("ROLE_" + user.getRoleName()))
+                        ? Collections.singleton(new SimpleGrantedAuthority("ROLE_" + user.getRoleName()))
                         : user.getPermissions().stream()
                               .map(SimpleGrantedAuthority::new)
                               .collect(Collectors.toSet());
