@@ -42,12 +42,11 @@ public class CategoryController {
                 response, SuccessMessage.FIND_CATEGORY_BY_ID.getMessage() + categoryId);
     }
 
-    @PreAuthorize("hasAuthority('CATEGORY_CREATE')")
+//    @PreAuthorize("hasAuthority('CATEGORY_CREATE')")
     @PostMapping
     AbstractResponse createCategory(@RequestBody @Valid CategoryRequest request) {
         CategoryResponse response = mapper.toResponseModel(service.createCategory(request));
-        return new SuccessResponse<>(
-                response, HttpStatus.CREATED.value(), SuccessMessage.CREATE_CATEGORY.getMessage());
+        return new SuccessResponse<>(response, HttpStatus.CREATED.value(), SuccessMessage.CREATE_CATEGORY.getMessage());
     }
 
     @PreAuthorize("hasAuthority('CATEGORY_UPDATE')")

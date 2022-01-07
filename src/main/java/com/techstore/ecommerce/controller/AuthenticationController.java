@@ -23,7 +23,6 @@ public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
-
     private final UserMapper mapper;
 
     @PostMapping("/login")
