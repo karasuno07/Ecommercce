@@ -5,7 +5,7 @@ import com.techstore.ecommerce.object.constant.Authorities;
 import com.techstore.ecommerce.object.dto.request.RoleRequest;
 import com.techstore.ecommerce.object.entity.jpa.Role;
 import com.techstore.ecommerce.object.mapper.RoleMapper;
-import com.techstore.ecommerce.repository.jpa.RoleRepository;
+import com.techstore.ecommerce.repository.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;

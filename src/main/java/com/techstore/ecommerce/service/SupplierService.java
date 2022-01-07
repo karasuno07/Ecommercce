@@ -3,9 +3,8 @@ package com.techstore.ecommerce.service;
 import com.techstore.ecommerce.exception.ResourceNotFoundException;
 import com.techstore.ecommerce.object.dto.request.SupplierRequest;
 import com.techstore.ecommerce.object.entity.jpa.Supplier;
-import com.techstore.ecommerce.object.entity.jpa.Supplier;
 import com.techstore.ecommerce.object.mapper.SupplierMapper;
-import com.techstore.ecommerce.repository.jpa.SupplierRepository;
+import com.techstore.ecommerce.repository.SupplierRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

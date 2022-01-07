@@ -4,7 +4,7 @@ import com.techstore.ecommerce.exception.ResourceNotFoundException;
 import com.techstore.ecommerce.object.dto.request.BrandRequest;
 import com.techstore.ecommerce.object.entity.jpa.Brand;
 import com.techstore.ecommerce.object.mapper.BrandMapper;
-import com.techstore.ecommerce.repository.jpa.BrandRepository;
+import com.techstore.ecommerce.repository.BrandRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -44,10 +44,10 @@ public class BrandService {
     brandRepo.delete(brand);
   }
 
-  public void existingBrand(Brand brand){
+  protected void existingBrand(Brand brand){
     boolean existing = brandRepo.existsByName(brand.getName());
     if(existing){
-      throw new EntityExistsException("Brand name "+brand.getName()+" already exists");
+      throw new EntityExistsException("Brand name " + brand.getName() + " already exists");
     }
   }
 }

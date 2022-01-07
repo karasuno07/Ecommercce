@@ -1,7 +1,6 @@
-package com.techstore.ecommerce.repository.jpa.spec;
+package com.techstore.ecommerce.repository.spec;
 
 import com.techstore.ecommerce.object.dto.filter.OrderFilter;
-import com.techstore.ecommerce.object.dto.filter.ProductFilter;
 import com.techstore.ecommerce.object.entity.jpa.Order;
 import com.techstore.ecommerce.object.entity.jpa.Product;
 import org.springframework.data.jpa.domain.Specification;

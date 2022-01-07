@@ -9,8 +9,8 @@ import com.techstore.ecommerce.object.entity.jpa.OrderDetail;
 import com.techstore.ecommerce.object.entity.jpa.User;
 import com.techstore.ecommerce.object.mapper.OrderDetailMapper;
 import com.techstore.ecommerce.object.mapper.OrderMapper;
-import com.techstore.ecommerce.repository.jpa.OrderRepository;
-import com.techstore.ecommerce.repository.jpa.spec.OrderSpec;
+import com.techstore.ecommerce.repository.OrderRepository;
+import com.techstore.ecommerce.repository.spec.OrderSpec;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -32,12 +32,8 @@ public class OrderService {
     private final UserService userService;
 
     public Page<Order> findAllOrders(OrderFilter filter) {
-
-        Page<Order> orders;
         Specification<Order> specification = OrderSpec.getSpecification(filter);
-        orders = orderRepo.findAll(specification, filter.getPagination().getPageAndSort());
-        log.info("USE DB: " + orders);
-        return orders;
+        return orderRepo.findAll(specification, filter.getPagination().getPageAndSort());
     }
 
 

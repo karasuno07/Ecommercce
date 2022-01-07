@@ -6,8 +6,8 @@ import com.techstore.ecommerce.object.dto.request.UserRequest;
 import com.techstore.ecommerce.object.entity.jpa.Role;
 import com.techstore.ecommerce.object.entity.jpa.User;
 import com.techstore.ecommerce.object.mapper.UserMapper;
-import com.techstore.ecommerce.repository.jpa.UserRepository;
-import com.techstore.ecommerce.repository.jpa.spec.UserSpec;
+import com.techstore.ecommerce.repository.UserRepository;
+import com.techstore.ecommerce.repository.spec.UserSpec;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -34,21 +34,6 @@ public class UserService implements UserDetailsService {
 
     private final RoleService roleService;
 
-    @PostConstruct
-    protected void validateData() {
-        //TODO: NOT FIX
-//        long jpaCount = userJpaRepo.count();
-//        long esCount = userESRepo.count();
-//        if (esCount != jpaCount) {
-//        log.info("ON LOAD USER DATA FROM JPA TO ES...");
-//        userESRepo.deleteAll();
-//        List<UserES> data = userJpaRepo.findAll().stream()
-//                                       .map(userMapper::jpaToEsEntity)
-//                                       .collect(Collectors.toList());
-//        System.out.println(data);
-//            userESRepo.saveAll(data);
-//        }
-    }
 
     public Page<User> findAllUsers(UserFilter filter) {
 
@@ -60,17 +45,12 @@ public class UserService implements UserDetailsService {
     }
 
     public User findUserById(long id) {
-        //TODO: NOT FIX
-//        UserES userES = userESRepo.findById(id).orElseThrow(
-//                () -> new ResourceNotFoundException("Not found any user with id " + id));
-//        return userMapper.esToJpaEntity(userES);
-        return null;
+        return userJpaRepo.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Not found any user with id " + id));
     }
 
     public boolean validateUsername(String username) {
-        //TODO NOT FIX
-//        return userESRepo.existsByUsername(username);
-        return false;
+        return userJpaRepo.existsByUsername(username);
     }
 
     public User createUser(UserRequest request) {
@@ -137,7 +117,6 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
         return userJpaRepo.findByUsername(username).orElseThrow(
                 () -> new UsernameNotFoundException("Username " + username + " not found"));
 

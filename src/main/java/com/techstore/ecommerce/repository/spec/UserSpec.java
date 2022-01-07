@@ -1,4 +1,4 @@
-package com.techstore.ecommerce.repository.jpa.spec;
+package com.techstore.ecommerce.repository.spec;
 
 import com.techstore.ecommerce.object.dto.filter.UserFilter;
 import com.techstore.ecommerce.object.entity.jpa.User;

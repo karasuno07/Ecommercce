@@ -6,7 +6,7 @@ import com.techstore.ecommerce.object.entity.jpa.Product;
 import com.techstore.ecommerce.object.entity.jpa.ProductReview;
 import com.techstore.ecommerce.object.entity.jpa.User;
 import com.techstore.ecommerce.object.mapper.ProductReviewMapper;
-import com.techstore.ecommerce.repository.jpa.ProductReviewRepository;
+import com.techstore.ecommerce.repository.ProductReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

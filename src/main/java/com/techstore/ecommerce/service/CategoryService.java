@@ -4,7 +4,7 @@ import com.techstore.ecommerce.exception.ResourceNotFoundException;
 import com.techstore.ecommerce.object.dto.request.CategoryRequest;
 import com.techstore.ecommerce.object.entity.jpa.Category;
 import com.techstore.ecommerce.object.mapper.CategoryMapper;
-import com.techstore.ecommerce.repository.jpa.CategoryRepository;
+import com.techstore.ecommerce.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -44,10 +44,10 @@ public class CategoryService {
         categoryRepo.delete(category);
     }
 
-    public void existingCategory(Category category){
+    protected void existingCategory(Category category){
         boolean existing = categoryRepo.existsByName(category.getName());
         if(existing){
-            throw new EntityExistsException("Category name "+category.getName()+" already exists");
+            throw new EntityExistsException("Category name " + category.getName() + " already exists");
         }
     }
 }
