@@ -9,6 +9,12 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQL94Dialect
     hibernate:
       ddl-auto: update
+  redis:
+    client-name: 'master'
+    host: 'ec2-54-175-78-101.compute-1.amazonaws.com'
+    port: 15900
+    password: 'p4af09c2eb7462c5126541c5cead9fa8af0cf7230cebe6cd07f3322b279bcaccf'
+    url: 'redis://:p4af09c2eb7462c5126541c5cead9fa8af0cf7230cebe6cd07f3322b279bcaccf@ec2-54-175-78-101.compute-1.amazonaws.com:15900'
 ## Firebase Cloud
 firebase:
   project-id: 'fit-territory-318516'

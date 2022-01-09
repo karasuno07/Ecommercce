@@ -4,6 +4,7 @@ import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 import org.redisson.spring.data.connection.RedissonConnectionFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -13,13 +14,23 @@ import org.springframework.context.annotation.Configuration;
 @EnableCaching
 public class RedissonConfig {
 
+    @Value("spring.redis.client-name:master")
+    private String clientName;
+
+    @Value("spring.redis.password")
+    private String password;
+
+    @Value("spring.redis.uri:redis://127.0.0.1:6379")
+    private String uri;
+
     @Bean(destroyMethod = "shutdown")
     @ConditionalOnMissingBean
     public RedissonClient redissonClient() {
         Config config = new Config();
         config.useSingleServer()
-              .setClientName("master")
-              .setAddress("redis://127.0.0.1:6379");
+              .setClientName(clientName)
+              .setPassword(password)
+              .setAddress(uri);
 
         return Redisson.create(config);
     }

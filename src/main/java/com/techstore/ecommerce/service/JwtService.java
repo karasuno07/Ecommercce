@@ -92,7 +92,6 @@ public class JwtService {
         refreshToken.setToken(UUID.randomUUID().toString());
         refreshToken.setUser(user);
 
-        // TODO: save token to redis database
         userIdMap.fastPut(refreshToken.getToken(), user.getId(), 6, timeUnit);
         tokenMap.fastPut(user.getId(), user, 6, timeUnit);
 
