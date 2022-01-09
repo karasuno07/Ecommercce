@@ -2,19 +2,20 @@ spring:
   main:
     banner-mode: off
   datasource:
-    username: 'sqfquvyykqmmyf'
-    password: '561300e86d2e990903d50c4e192f906d5703ff5b9a88ae15d567b0589bd92e78'
-    url: 'postgres://sqfquvyykqmmyf:561300e86d2e990903d50c4e192f906d5703ff5b9a88ae15d567b0589bd92e78@ec2-100-25-72-111.compute-1.amazonaws.com:5432/dbmggum4t7mi1r'
+    username: sqfquvyykqmmyf
+    password: 561300e86d2e990903d50c4e192f906d5703ff5b9a88ae15d567b0589bd92e78
+    url: jdbc:postgresql://ec2-100-25-72-111.compute-1.amazonaws.com:5432/dbmggum4t7mi1r
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQL94Dialect
     hibernate:
       ddl-auto: update
   redis:
-    client-name: 'master'
-    host: 'ec2-54-175-78-101.compute-1.amazonaws.com'
+    client-name: master
+    host: ec2-54-175-78-101.compute-1.amazonaws.com
     port: 15900
-    password: 'p4af09c2eb7462c5126541c5cead9fa8af0cf7230cebe6cd07f3322b279bcaccf'
-    url: 'redis://:p4af09c2eb7462c5126541c5cead9fa8af0cf7230cebe6cd07f3322b279bcaccf@ec2-54-175-78-101.compute-1.amazonaws.com:15900'
+    password: p4af09c2eb7462c5126541c5cead9fa8af0cf7230cebe6cd07f3322b279bcaccf
+    url: redis://127.0.0.1:6379
+#    url: redis://:p4af09c2eb7462c5126541c5cead9fa8af0cf7230cebe6cd07f3322b279bcaccf@ec2-54-175-78-101.compute-1.amazonaws.com:15900
 ## Firebase Cloud
 firebase:
   project-id: 'fit-territory-318516'

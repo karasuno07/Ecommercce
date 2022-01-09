@@ -14,13 +14,13 @@ import org.springframework.context.annotation.Configuration;
 @EnableCaching
 public class RedissonConfig {
 
-    @Value("spring.redis.client-name:master")
+    @Value("${spring.redis.client-name:master}")
     private String clientName;
 
-    @Value("spring.redis.password")
+    @Value("${spring.redis.password}")
     private String password;
 
-    @Value("spring.redis.uri:redis://127.0.0.1:6379")
+    @Value("${spring.redis.url:redis://127.0.0.1:6379}")
     private String uri;
 
     @Bean(destroyMethod = "shutdown")
@@ -28,9 +28,12 @@ public class RedissonConfig {
     public RedissonClient redissonClient() {
         Config config = new Config();
         config.useSingleServer()
-              .setClientName(clientName)
-              .setPassword(password)
-              .setAddress(uri);
+                .setClientName("master")
+//                .setPassword(password)
+                .setAddress(uri)
+                .setConnectionPoolSize(10)
+                .setConnectionMinimumIdleSize(5)
+                .setConnectTimeout(30000);;
 
         return Redisson.create(config);
     }
