@@ -1,0 +1,1 @@
+java -Dserver.port=32733 $JAVA_OPTS -jar build/libs/techstore-ecommerce-backend-0.0.1-SNAPSHOT.jar
