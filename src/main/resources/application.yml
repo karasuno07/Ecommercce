@@ -13,8 +13,8 @@ spring:
     client-name: master
     host: ec2-54-175-78-101.compute-1.amazonaws.com
     port: 15900
-    password: p4af09c2eb7462c5126541c5cead9fa8af0cf7230cebe6cd07f3322b279bcaccf
-    url: redis://127.0.0.1:6379
+    password: kieo90vlH2gyybiMnxVpHUVo3cWnVD0X
+    url: redis://redis-11511.c61.us-east-1-3.ec2.cloud.redislabs.com:11511
 #    url: redis://:p4af09c2eb7462c5126541c5cead9fa8af0cf7230cebe6cd07f3322b279bcaccf@ec2-54-175-78-101.compute-1.amazonaws.com:15900
 ## Firebase Cloud
 firebase:

@@ -29,7 +29,7 @@ public class RedissonConfig {
         Config config = new Config();
         config.useSingleServer()
                 .setClientName("master")
-//                .setPassword(password)
+                .setPassword(password)
                 .setAddress(uri)
                 .setConnectionPoolSize(10)
                 .setConnectionMinimumIdleSize(5)
