@@ -2,9 +2,9 @@ spring:
   main:
     banner-mode: off
   datasource:
-    username: techstore
-    password: 123456
-    url: jdbc:postgresql://localhost:5432/techstore_ecommerce
+    username: sqfquvyykqmmyf
+    password: 561300e86d2e990903d50c4e192f906d5703ff5b9a88ae15d567b0589bd92e78
+    url: postgres://sqfquvyykqmmyf:561300e86d2e990903d50c4e192f906d5703ff5b9a88ae15d567b0589bd92e78@ec2-100-25-72-111.compute-1.amazonaws.com:5432/dbmggum4t7mi1r
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQL94Dialect
     hibernate:
