@@ -16,8 +16,6 @@ public interface UserMapper {
     UserResponse toResponseModel(User user);
 
     @Mapping(target = "roleName", expression = "java(user.getRole().getName())")
-    @Mapping(target = "permissions",
-            expression = "java(new java.util.ArrayList(user.getRole().getAuthorities()))")
     AuthenticationInfo toAuthInfo(User user);
 
     @Mapping(target = "fullName", ignore = true)

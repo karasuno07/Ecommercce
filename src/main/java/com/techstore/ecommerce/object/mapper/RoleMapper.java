@@ -17,9 +17,7 @@ public interface RoleMapper {
 
     RoleResponse toResponseModel(Role role);
 
-    @Mapping(target = "authorities", ignore = true)
     Role createEntityFromRequest(RoleRequest request);
 
-    @Mapping(target = "authorities", ignore = true)
     void update(@MappingTarget Role role, RoleRequest request);
 }

@@ -3,14 +3,12 @@ package com.techstore.ecommerce.object.mapper;
 import com.techstore.ecommerce.object.dto.request.RoleRequest;
 import com.techstore.ecommerce.object.dto.response.RoleResponse;
 import com.techstore.ecommerce.object.entity.jpa.Role;
-import java.util.HashSet;
-import java.util.List;
 import javax.annotation.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-02-28T17:22:21+0700",
+    date = "2022-02-28T17:51:47+0700",
     comments = "version: 1.4.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.2.jar, environment: Java 11.0.13 (JetBrains s.r.o.)"
 )
 @Component
@@ -26,10 +24,6 @@ public class RoleMapperImpl implements RoleMapper {
 
         roleResponse.setId( role.getId() );
         roleResponse.setName( role.getName() );
-        List<String> list = role.getAuthorities();
-        if ( list != null ) {
-            roleResponse.setAuthorities( new HashSet<String>( list ) );
-        }
 
         return roleResponse;
     }

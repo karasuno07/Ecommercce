@@ -50,7 +50,7 @@ public class JwtService {
         payload.put("id", user.getId());
         payload.put("username", user.getUsername());
         payload.put("role", user.getRole().getName());
-        payload.put("permissions", user.getRole().getAuthorities());
+        payload.put("permissions", user.getRole().getName());
 
         JWTCreator.Builder builder = JWT.create();
         builder.withKeyId(UUID.randomUUID().toString());
@@ -70,7 +70,6 @@ public class JwtService {
         authInfo.setId(claims.get("id").asInt());
         authInfo.setUsername(claims.get("username").asString());
         authInfo.setRoleName(claims.get("role").asString());
-        authInfo.setPermissions(claims.get("permissions").asList(String.class));
 
         return authInfo;
     }

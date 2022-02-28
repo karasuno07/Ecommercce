@@ -20,5 +20,4 @@ public class AuthenticationInfo {
     @JsonProperty("role")
     private String roleName;
 
-    private List<String> permissions;
 }

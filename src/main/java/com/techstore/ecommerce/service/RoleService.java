@@ -36,7 +36,7 @@ public class RoleService {
 
     public Role createRole(RoleRequest request) {
         Role role = roleMapper.createEntityFromRequest(request);
-        getAuthorities(role, request);
+//        getAuthorities(role, request);
 
         return roleRepo.save(role);
     }
@@ -44,7 +44,7 @@ public class RoleService {
     public Role updateRole(long id, RoleRequest request) {
         Role role = findRoleById(id);
         roleMapper.update(role, request);
-        getAuthorities(role, request);
+//        getAuthorities(role, request);
         System.out.println(role);
         return roleRepo.save(role);
     }
@@ -54,16 +54,16 @@ public class RoleService {
         roleRepo.delete(role);
     }
 
-    private void getAuthorities(Role role, RoleRequest request) {
-        if (ObjectUtils.isEmpty(role.getAuthorities())) role.setAuthorities(new ArrayList<>());
-        if (!ObjectUtils.isEmpty(request.getAuthorities())) {
-            Set<String> set = request.getAuthorities().stream()
-                                     .filter(this::isValidAuthority)
-                                     .collect(Collectors.toSet());
-            role.getAuthorities().clear();
-            role.getAuthorities().addAll(set);
-        }
-    }
+//    private void getAuthorities(Role role, RoleRequest request) {
+//        if (ObjectUtils.isEmpty(role.getAuthorities())) role.setAuthorities(new ArrayList<>());
+//        if (!ObjectUtils.isEmpty(request.getAuthorities())) {
+//            Set<String> set = request.getAuthorities().stream()
+//                                     .fiter(this::isValidAuthority)
+//                                     .collect(Collectors.toSet());
+//            role.getAuthorities().clear();l
+//            role.getAuthorities().addAll(set);
+//        }
+//    }
 
     private boolean isValidAuthority(String value) {
         boolean valid = Arrays.stream(Authorities.values())
