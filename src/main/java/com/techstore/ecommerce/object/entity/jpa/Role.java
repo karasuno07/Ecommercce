@@ -16,17 +16,13 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@TypeDef(name = "list-array", typeClass = ListArrayType.class)
+@SequenceGenerator(name = "role_seq", sequenceName = "roles_id_seq", allocationSize = 1)
 public class Role implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_seq")
     private long id;
 
     @Column(columnDefinition = "varchar(50)", nullable = false)
     private String name;
-
-    @Type(type = "list-array")
-    @Column(columnDefinition = "text[]")
-    private List<String> authorities;
 }

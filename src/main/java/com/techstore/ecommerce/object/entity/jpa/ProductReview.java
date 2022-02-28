@@ -10,10 +10,11 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
+@SequenceGenerator(name = "product_reviews_id_seq", sequenceName = "product_reviews_id_seq", allocationSize = 1)
 public class ProductReview {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_reviews_id_seq")
     private long id;
 
     @Column(nullable = false)

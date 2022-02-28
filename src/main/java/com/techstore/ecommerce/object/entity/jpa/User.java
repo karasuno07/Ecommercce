@@ -19,10 +19,11 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @ToString
+@SequenceGenerator(name = "users_id_seq", sequenceName = "users_id_seq", allocationSize = 1)
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_id_seq")
     private long id;
 
     @Column(columnDefinition = "varchar(50)", nullable = false)
@@ -74,9 +75,7 @@ public class User implements UserDetails {
             return Collections.singleton(new SimpleGrantedAuthority("ROLE_CUSTOMER"));
         }
 
-        return role.getAuthorities().stream()
-                   .map(authority -> new SimpleGrantedAuthority(authority.toUpperCase()))
-                   .collect(Collectors.toSet());
+        return Collections.singleton(new SimpleGrantedAuthority(role.getName()));
     }
 
     @Override

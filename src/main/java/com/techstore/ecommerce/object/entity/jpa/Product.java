@@ -10,10 +10,11 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@SequenceGenerator(name = "products_id_seq", sequenceName = "products_id_seq", allocationSize = 1)
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "products_id_seq")
     private long id;
 
     @Column(columnDefinition = "varchar(100)", nullable = false)

@@ -12,10 +12,11 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@SequenceGenerator(name = "category_seq", sequenceName = "categories_id_seq", allocationSize = 1)
 public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_seq")
     private long id;
 
     @Column(nullable = false, columnDefinition = "varchar(100)")

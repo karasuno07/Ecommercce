@@ -12,10 +12,11 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @ToString
+@SequenceGenerator(name = "product_details_seq", sequenceName = "product_details_id_seq", allocationSize = 1)
 public class OrderDetail {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_details_seq")
     private long id;
 
     @Column(nullable = false)

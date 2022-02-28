@@ -12,9 +12,10 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @ToString
+@SequenceGenerator(name = "receipt_details_id_seq", sequenceName = "receipt_details_id_seq", allocationSize = 1)
 public class ReceiptDetail {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "receipt_details_id_seq")
     private long id;
 
     @Column(nullable = false)

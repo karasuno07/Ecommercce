@@ -28,12 +28,9 @@ public class RedissonConfig {
     public RedissonClient redissonClient() {
         Config config = new Config();
         config.useSingleServer()
-                .setClientName("master")
+                .setClientName(clientName)
                 .setPassword(password)
-                .setAddress(uri)
-                .setConnectionPoolSize(10)
-                .setConnectionMinimumIdleSize(5)
-                .setConnectTimeout(30000);;
+                .setAddress(uri);
 
         return Redisson.create(config);
     }

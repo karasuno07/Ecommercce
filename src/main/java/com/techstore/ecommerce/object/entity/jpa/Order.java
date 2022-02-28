@@ -14,10 +14,11 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
+@SequenceGenerator(name = "order_seq", sequenceName = "orders_id_seq", allocationSize = 1)
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_seq")
     private long id;
 
     @Column(columnDefinition = "text", nullable = false)
