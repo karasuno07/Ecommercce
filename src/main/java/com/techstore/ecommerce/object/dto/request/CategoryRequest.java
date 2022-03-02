@@ -11,6 +11,5 @@ public class CategoryRequest {
     @NotBlank(message = "blank")
     private String name;
 
-    @JsonProperty("parent_id")
     private Integer parentId;
 }

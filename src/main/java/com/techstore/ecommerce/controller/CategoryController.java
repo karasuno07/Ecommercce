@@ -24,7 +24,7 @@ public class CategoryController {
     private final CategoryService service;
     private final CategoryMapper mapper;
 
-    @PreAuthorize("hasAuthority('CATEGORY_READ')")
+//    @PreAuthorize("hasAuthority('CATEGORY_READ')")
     @GetMapping
     AbstractResponse getAllCategory() {
         List<CategoryResponse> response =
@@ -35,7 +35,7 @@ public class CategoryController {
         return new SuccessResponse<>(response, SuccessMessage.FIND_ALL_CATEGORIES.getMessage());
     }
 
-    @PreAuthorize("hasAuthority('CATEGORY_READ')")
+//    @PreAuthorize("hasAuthority('CATEGORY_READ')")
     @GetMapping("/{categoryId}")
     AbstractResponse getCategoryById(@PathVariable int categoryId) {
         CategoryResponse response = mapper.toResponseModel(service.findCategoryById(categoryId));
@@ -50,7 +50,7 @@ public class CategoryController {
         return new SuccessResponse<>(response, HttpStatus.CREATED.value(), SuccessMessage.CREATE_CATEGORY.getMessage());
     }
 
-    @PreAuthorize("hasAuthority('CATEGORY_UPDATE')")
+//    @PreAuthorize("hasAuthority('CATEGORY_UPDATE')")
     @PutMapping("/{categoryId}")
     AbstractResponse updateCategory(
             @PathVariable int categoryId, @RequestBody @Valid CategoryRequest request) {
@@ -58,7 +58,7 @@ public class CategoryController {
         return new SuccessResponse<>(response, SuccessMessage.UPDATE_CATEGORY.getMessage());
     }
 
-    @PreAuthorize("hasAuthority('CATEGORY_DELETE')")
+//    @PreAuthorize("hasAuthority('CATEGORY_DELETE')")
     @DeleteMapping("/{categoryId}")
     AbstractResponse deleteCategory(@PathVariable long categoryId) {
         service.deleteCategory(categoryId);
