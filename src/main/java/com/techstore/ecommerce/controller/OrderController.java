@@ -20,6 +20,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/orders")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class OrderController {
     private final OrderService service;
     private final OrderMapper mapper;

@@ -4,4 +4,4 @@ values ('img', 'Apple', 'apple'),
 
 insert into public.categories (name, slug, parent_id)
 values ('Điện thoại', 'dien-thoai', null),
-       ('Laptop', 'laptop', null),
+       ('Laptop', 'laptop', null)

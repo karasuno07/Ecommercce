@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/suppliers")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class SupplierController {
     private final SupplierService service;
     private final SupplierMapper mapper;

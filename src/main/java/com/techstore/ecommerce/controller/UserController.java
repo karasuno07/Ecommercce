@@ -20,6 +20,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class UserController {
     private final UserService service;
     private final UserMapper mapper;

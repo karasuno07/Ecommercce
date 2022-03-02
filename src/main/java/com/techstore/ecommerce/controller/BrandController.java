@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/brands")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class BrandController {
     private final BrandService service;
     private final BrandMapper mapper;
