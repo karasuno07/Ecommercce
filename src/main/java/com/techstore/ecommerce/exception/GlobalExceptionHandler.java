@@ -35,6 +35,8 @@ public class GlobalExceptionHandler {
         response.setResponseCode(HttpStatus.BAD_REQUEST.value());
         response.setMessage(exception.getMessage());
 
+        exception.printStackTrace();
+
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
@@ -57,6 +59,8 @@ public class GlobalExceptionHandler {
                 "Something were wrong with your query, " + "please check errors and try again.");
         response.setErrors(errors);
 
+        exception.printStackTrace();
+
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
@@ -67,6 +71,8 @@ public class GlobalExceptionHandler {
 
         Collection<? extends GrantedAuthority> authorities =
                 SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+
+        exception.printStackTrace();
 
         if (authorities.contains(new SimpleGrantedAuthority("ROLE_ANONYMOUS"))) {
             response.setResponseCode(HttpStatus.UNAUTHORIZED.value());
@@ -87,6 +93,8 @@ public class GlobalExceptionHandler {
         response.setResponseCode(HttpStatus.UNAUTHORIZED.value());
         response.setMessage(exception.getMessage());
 
+        exception.printStackTrace();
+
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
 
@@ -101,6 +109,8 @@ public class GlobalExceptionHandler {
                 ? "Resource not found"
                 : exception.getMessage());
 
+        exception.printStackTrace();
+
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
@@ -110,6 +120,8 @@ public class GlobalExceptionHandler {
 
         response.setResponseCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
         response.setMessage(exception.getMessage());
+
+        exception.printStackTrace();
 
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -121,6 +133,8 @@ public class GlobalExceptionHandler {
         response.setResponseCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
         response.setMessage(exception.getMessage());
 
+        exception.printStackTrace();
+
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -130,6 +144,8 @@ public class GlobalExceptionHandler {
 
         response.setResponseCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
         response.setMessage(exception.getMessage());
+
+        exception.printStackTrace();
 
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }

@@ -12,14 +12,16 @@ public interface CategoryMapper {
 
     CategoryResponse toResponseModel(Category category);
 
-    @Mapping(target = "parent.id", source = "parentId")
+//    @Mapping(target = "parent.id", source = "parentId")
     Category createEntityFromRequest(CategoryRequest request);
 
     void update(@MappingTarget Category category, CategoryRequest request);
 
     @AfterMapping
     default void generateSlug(@MappingTarget Category category, CategoryRequest request) {
-        String slug = CustomStringUtil.generateSlug(request.getName());
-        category.setSlug(slug);
+        if(request.getName() != null){
+            String slug = CustomStringUtil.generateSlug(request.getName());
+            category.setSlug(slug);
+        }
     }
 }

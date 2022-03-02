@@ -30,12 +30,15 @@ public class CategoryService {
     public Category createCategory(CategoryRequest request) {
         Category category = categoryMapper.createEntityFromRequest(request);
         existingCategory(category);
+        setCategoryById(category, request);
+        System.out.println(category);
         return categoryRepo.save(category);
     }
 
     public Category updateCategory(long id, CategoryRequest request) {
         Category category = findCategoryById(id);
         categoryMapper.update(category, request);
+        setCategoryById(category, request);
         return categoryRepo.save(category);
     }
 
@@ -48,6 +51,16 @@ public class CategoryService {
         boolean existing = categoryRepo.existsByName(category.getName());
         if(existing){
             throw new EntityExistsException("Category name " + category.getName() + " already exists");
+        }
+    }
+
+    private void setCategoryById(Category category, CategoryRequest request){
+        if(request.getParentId() != null){
+           Category categoryParent = categoryRepo.findById(request.getParentId()).orElseThrow(
+                   () -> new ResourceNotFoundException("Not found any category parent with id " + request.getParentId())
+           );
+
+           category.setParent(categoryParent);
         }
     }
 }

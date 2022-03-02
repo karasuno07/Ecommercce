@@ -11,5 +11,5 @@ public class CategoryRequest {
     @NotBlank(message = "blank")
     private String name;
 
-    private Integer parentId;
+    private Long parentId;
 }
