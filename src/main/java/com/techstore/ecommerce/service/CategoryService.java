@@ -21,9 +21,8 @@ public class CategoryService {
     private final CategoryRepository categoryRepo;
     private final CategoryMapper categoryMapper;
 
-    public List<Category> findAllCategories(Sorting sorting){
-        Sort sort = getSort(sorting);
-        return categoryRepo.findAll(sort);
+    public List<Category> findAllCategories(){
+        return categoryRepo.findAll();
     }
 
     public Category findCategoryById(long id) {

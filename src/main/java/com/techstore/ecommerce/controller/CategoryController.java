@@ -28,9 +28,9 @@ public class CategoryController {
 
 //    @PreAuthorize("hasAuthority('CATEGORY_READ')")
     @GetMapping
-    AbstractResponse getAllCategory(@RequestBody Optional<Sorting> sorting) {
+    AbstractResponse getAllCategory() {
         List<CategoryResponse> response =
-                service.findAllCategories(sorting.orElse(null)).stream()
+                service.findAllCategories().stream()
                        .map(mapper::toResponseModel)
                        .collect(Collectors.toList());
 

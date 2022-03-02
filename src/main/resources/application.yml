@@ -14,3 +14,7 @@ spring:
     client-name: master
     password: fpt@123456
     url: redis://localhost:4002
+cloudinary:
+  cloud-name: fpt-software-quiz
+  api-key: 446252591291621
+  api-secret: w6AQxknBfDg_ykT_NKFlTOOxQsw
