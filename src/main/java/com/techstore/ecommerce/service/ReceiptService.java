@@ -6,7 +6,7 @@ import com.techstore.ecommerce.object.dto.request.ReceiptRequest;
 import com.techstore.ecommerce.object.entity.jpa.Receipt;
 import com.techstore.ecommerce.object.entity.jpa.ReceiptDetail;
 import com.techstore.ecommerce.object.mapper.ReceiptDetailMapper;
-import com.techstore.ecommerce.object.mapper.ReceiptMapper;
+import com.techstore.ecommerce.object.entity.jpa.ReceiptMapper;
 import com.techstore.ecommerce.repository.ReceiptRepository;
 import com.techstore.ecommerce.repository.spec.ReceiptSpec;
 import lombok.RequiredArgsConstructor;

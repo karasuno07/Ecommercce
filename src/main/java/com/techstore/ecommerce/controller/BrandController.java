@@ -24,7 +24,7 @@ public class BrandController {
     private final BrandService service;
     private final BrandMapper mapper;
 
-    @PreAuthorize("hasAuthority('BRAND_READ') OR hasRole('CUSTOMER')")
+    //@PreAuthorize("hasAuthority('BRAND_READ') OR hasRole('CUSTOMER')")
     @GetMapping
     AbstractResponse getAllBrand() {
         List<BrandResponse> response =
@@ -35,14 +35,14 @@ public class BrandController {
         return new SuccessResponse<>(response, SuccessMessage.FIND_ALL_BRANDS.getMessage());
     }
 
-    @PreAuthorize("hasAuthority('BRAND_READ') OR hasRole('CUSTOMER')")
+    //@PreAuthorize("hasAuthority('BRAND_READ') OR hasRole('CUSTOMER')")
     @GetMapping("/{brandId}")
     AbstractResponse getBrandById(@PathVariable int brandId) {
         BrandResponse response = mapper.toResponseModel(service.findBrandById(brandId));
         return new SuccessResponse<>(response, SuccessMessage.FIND_BRAND_BY_ID.getMessage() + brandId);
     }
 
-    @PreAuthorize("hasAuthority('BRAND_CREATE')")
+    //@PreAuthorize("hasAuthority('BRAND_CREATE')")
     @PostMapping
     AbstractResponse createBrand(@RequestBody @Valid BrandRequest request) {
         BrandResponse response = mapper.toResponseModel(service.createBrand(request));
@@ -50,7 +50,7 @@ public class BrandController {
                 response, HttpStatus.CREATED.value(), SuccessMessage.CREATE_BRAND.getMessage());
     }
 
-    @PreAuthorize("hasAuthority('BRAND_UPDATE')")
+    //@PreAuthorize("hasAuthority('BRAND_UPDATE')")
     @PutMapping("/{brandId}")
     AbstractResponse updateBrand(
             @PathVariable int brandId, @RequestBody @Valid BrandRequest request) {
@@ -58,7 +58,7 @@ public class BrandController {
         return new SuccessResponse<>(response, SuccessMessage.UPDATE_BRAND.getMessage());
     }
 
-    @PreAuthorize("hasAuthority('BRAND_DELETE')")
+    //@PreAuthorize("hasAuthority('BRAND_DELETE')")
     @DeleteMapping("/{brandId}")
     AbstractResponse deleteBrand(@PathVariable long brandId) {
         service.deleteBrand(brandId);

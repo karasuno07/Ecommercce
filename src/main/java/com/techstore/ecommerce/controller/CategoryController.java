@@ -4,6 +4,7 @@ import com.techstore.ecommerce.object.constant.SuccessMessage;
 import com.techstore.ecommerce.object.dto.request.CategoryRequest;
 import com.techstore.ecommerce.object.dto.response.CategoryResponse;
 import com.techstore.ecommerce.object.mapper.CategoryMapper;
+import com.techstore.ecommerce.object.model.Sorting;
 import com.techstore.ecommerce.object.wrapper.AbstractResponse;
 import com.techstore.ecommerce.object.wrapper.SuccessResponse;
 import com.techstore.ecommerce.service.CategoryService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -26,9 +28,9 @@ public class CategoryController {
 
 //    @PreAuthorize("hasAuthority('CATEGORY_READ')")
     @GetMapping
-    AbstractResponse getAllCategory() {
+    AbstractResponse getAllCategory(@RequestBody Optional<Sorting> sorting) {
         List<CategoryResponse> response =
-                service.findAllCategories().stream()
+                service.findAllCategories(sorting.orElse(null)).stream()
                        .map(mapper::toResponseModel)
                        .collect(Collectors.toList());
 

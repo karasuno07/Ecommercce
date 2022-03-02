@@ -3,7 +3,7 @@ package com.techstore.ecommerce.controller;
 import com.techstore.ecommerce.object.dto.filter.ReceiptFilter;
 import com.techstore.ecommerce.object.dto.request.ReceiptRequest;
 import com.techstore.ecommerce.object.dto.response.ReceiptResponse;
-import com.techstore.ecommerce.object.mapper.ReceiptMapper;
+import com.techstore.ecommerce.object.entity.jpa.ReceiptMapper;
 import com.techstore.ecommerce.object.wrapper.AbstractResponse;
 import com.techstore.ecommerce.object.wrapper.SuccessResponse;
 import com.techstore.ecommerce.service.ReceiptService;

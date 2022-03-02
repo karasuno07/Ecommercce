@@ -4,9 +4,12 @@ import com.techstore.ecommerce.exception.ResourceNotFoundException;
 import com.techstore.ecommerce.object.dto.request.CategoryRequest;
 import com.techstore.ecommerce.object.entity.jpa.Category;
 import com.techstore.ecommerce.object.mapper.CategoryMapper;
+import com.techstore.ecommerce.object.model.Sorting;
 import com.techstore.ecommerce.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.persistence.EntityExistsException;
 import java.util.List;
@@ -18,8 +21,9 @@ public class CategoryService {
     private final CategoryRepository categoryRepo;
     private final CategoryMapper categoryMapper;
 
-    public List<Category> findAllCategories(){
-        return categoryRepo.findAll();
+    public List<Category> findAllCategories(Sorting sorting){
+        Sort sort = getSort(sorting);
+        return categoryRepo.findAll(sort);
     }
 
     public Category findCategoryById(long id) {
@@ -62,5 +66,12 @@ public class CategoryService {
 
            category.setParent(categoryParent);
         }
+    }
+
+    private Sort getSort(Sorting sorting){
+        return ObjectUtils.isEmpty(sorting)
+                ? Sort.unsorted()
+                : Sort.by(sorting.isAsc() ? Sort.Direction.ASC : Sort.Direction.DESC,
+                sorting.getFieldName());
     }
 }

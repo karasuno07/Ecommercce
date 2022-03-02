@@ -33,9 +33,10 @@ public class ProductController {
     private final ProductReviewService reviewService;
     private final ProductReviewMapper reviewMapper;
 
-    @PreAuthorize("hasAuthority('PRODUCT_READ') OR hasRole('CUSTOMER')")
+//    @PreAuthorize("hasAuthority('PRODUCT_READ') OR hasRole('CUSTOMER')")
     @GetMapping
     AbstractResponse getAllProduct(@RequestBody Optional<ProductFilter> filter) {
+        System.out.println("filter: "+filter);
         Page<ProductResponse> response = productService.findAllProducts(
                 filter.orElse(new ProductFilter())).map(productMapper::toResponseModel);
 
