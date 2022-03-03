@@ -7,6 +7,7 @@ import com.techstore.ecommerce.object.mapper.BrandMapper;
 import com.techstore.ecommerce.repository.BrandRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.persistence.EntityExistsException;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
 public class BrandService {
   private final BrandRepository brandRepo;
   private final BrandMapper brandMapper;
+  private final CloudinaryService cloudinaryService;
 
   public List<Brand> findAllBrands(){
     return brandRepo.findAll();
@@ -29,13 +31,23 @@ public class BrandService {
   public Brand createBrand(BrandRequest request) {
     Brand brand = brandMapper.createEntityFromRequest(request);
     existingBrand(brand);
+    if (!ObjectUtils.isEmpty(request.getImageFile())) {
+      String image = cloudinaryService.uploadImage(null, request.getImageFile());
+      if (image != null) brand.setImage(image);
+    }
     return brandRepo.save(brand);
   }
 
   public Brand updateBrand(long id, BrandRequest request) {
     Brand brand = findBrandById(id);
     brandMapper.update(brand, request);
-    //TODO: kiểm tra tên giống như create
+    existingBrand(brand);
+
+    if (!ObjectUtils.isEmpty(request.getImageFile())) {
+      String image = cloudinaryService.uploadImage(brand.getImage(), request.getImageFile());
+      if (image != null) brand.setImage(image);
+    }
+
     return brandRepo.save(brand);
   }
 
