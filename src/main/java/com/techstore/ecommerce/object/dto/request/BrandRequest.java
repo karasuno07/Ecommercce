@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Data
 public class BrandRequest {
 
-//    @NotBlank(message = "blank")
+    @NotBlank(message = "blank")
     private String name;
 
 //    @NotNull(message = "null")

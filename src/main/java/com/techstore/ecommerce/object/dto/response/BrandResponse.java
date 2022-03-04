@@ -10,4 +10,6 @@ public class BrandResponse {
     private String name;
 
     private String slug;
+
+    private String image;
 }
