@@ -43,8 +43,9 @@ public class BrandController {
     }
 
     //@PreAuthorize("hasAuthority('BRAND_CREATE')")
-    @PostMapping
-    AbstractResponse createBrand(@RequestBody @Valid BrandRequest request) {
+    @PostMapping()
+    AbstractResponse createBrand(@ModelAttribute @Valid BrandRequest request) {
+        System.out.println(request);
         BrandResponse response = mapper.toResponseModel(service.createBrand(request));
         return new SuccessResponse<>(
                 response, HttpStatus.CREATED.value(), SuccessMessage.CREATE_BRAND.getMessage());

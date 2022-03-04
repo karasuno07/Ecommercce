@@ -12,6 +12,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/api/receipts")
 @RequiredArgsConstructor
@@ -21,16 +24,15 @@ public class ReceiptController {
     private final ReceiptService service;
     private final ReceiptMapper mapper;
 
-    @PreAuthorize("hasAuthority('RECEIPT_READ')")
+//    @PreAuthorize("hasAuthority('RECEIPT_READ')")
     @GetMapping
-    AbstractResponse getAllReceipts(@RequestBody ReceiptFilter filter) {
-        Page<ReceiptResponse> response = service.findAllReceipt(filter)
-                                                .map(mapper::toResponseModel);
-
+    AbstractResponse getAllReceipts() {
+        List<ReceiptResponse> response = service.findAllReceipt().stream()
+                .map(mapper::toResponseModel).collect(Collectors.toList());
         return new SuccessResponse<>(response, null);
     }
 
-    @PreAuthorize("hasAuthority('RECEIPT_READ')")
+//    @PreAuthorize("hasAuthority('RECEIPT_READ')")
     @GetMapping("/{receiptId}")
     AbstractResponse getReceiptById(@PathVariable long receiptId) {
         ReceiptResponse response = mapper.toResponseModel(service.findReceiptById(receiptId));
@@ -38,7 +40,7 @@ public class ReceiptController {
         return new SuccessResponse<>(response, null);
     }
 
-    @PreAuthorize("hasAuthority('RECEIPT_CREATE')")
+//    @PreAuthorize("hasAuthority('RECEIPT_CREATE')")
     @PostMapping
     AbstractResponse createReceipt(@RequestBody ReceiptRequest request) {
         ReceiptResponse response = mapper.toResponseModel(service.createReceipt(request));

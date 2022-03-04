@@ -24,9 +24,8 @@ public class ReceiptService {
     private final ReceiptMapper receiptMapper;
     private final ReceiptDetailMapper receiptDetailMapper;
 
-    public Page<Receipt> findAllReceipt(ReceiptFilter filter) {
-        Specification<Receipt> specification = ReceiptSpec.getSpecification(filter);
-        return receiptRepo.findAll(specification, filter.getPagination().getPageAndSort());
+    public List<Receipt> findAllReceipt() {
+        return receiptRepo.findAll();
     }
 
     public Receipt findReceiptById(long id) {

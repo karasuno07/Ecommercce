@@ -33,5 +33,4 @@ public class ReceiptDetail {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
-    //TODO: xử lí logic, nếu có thì update số lượng sản phẩm này, ko thì phải tạo mới
 }
