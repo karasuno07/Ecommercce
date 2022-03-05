@@ -1,14 +1,11 @@
 package com.techstore.ecommerce.controller;
 
-import com.techstore.ecommerce.object.dto.filter.ReceiptFilter;
 import com.techstore.ecommerce.object.dto.request.ReceiptRequest;
 import com.techstore.ecommerce.object.dto.response.ReceiptResponse;
-import com.techstore.ecommerce.object.entity.jpa.ReceiptMapper;
-import com.techstore.ecommerce.object.wrapper.AbstractResponse;
-import com.techstore.ecommerce.object.wrapper.SuccessResponse;
+import com.techstore.ecommerce.object.dto.mapper.ReceiptMapper;
 import com.techstore.ecommerce.service.ReceiptService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,36 +21,33 @@ public class ReceiptController {
     private final ReceiptService service;
     private final ReceiptMapper mapper;
 
-//    @PreAuthorize("hasAuthority('RECEIPT_READ')")
+    //    @PreAuthorize("hasAuthority('RECEIPT_READ')")
     @GetMapping
-    AbstractResponse getAllReceipts() {
+    ResponseEntity<?> getAllReceipts() {
         List<ReceiptResponse> response = service.findAllReceipt().stream()
-                .map(mapper::toResponseModel).collect(Collectors.toList());
-        return new SuccessResponse<>(response, null);
+                                                .map(mapper::toResponseModel).collect(Collectors.toList());
+        return ResponseEntity.ok(response);
     }
 
-//    @PreAuthorize("hasAuthority('RECEIPT_READ')")
+    //    @PreAuthorize("hasAuthority('RECEIPT_READ')")
     @GetMapping("/{receiptId}")
-    AbstractResponse getReceiptById(@PathVariable long receiptId) {
+    ResponseEntity<?> getReceiptById(@PathVariable long receiptId) {
         ReceiptResponse response = mapper.toResponseModel(service.findReceiptById(receiptId));
-
-        return new SuccessResponse<>(response, null);
+        return ResponseEntity.ok(response);
     }
 
-//    @PreAuthorize("hasAuthority('RECEIPT_CREATE')")
+    //    @PreAuthorize("hasAuthority('RECEIPT_CREATE')")
     @PostMapping
-    AbstractResponse createReceipt(@RequestBody ReceiptRequest request) {
+    ResponseEntity<?> createReceipt(@RequestBody ReceiptRequest request) {
         ReceiptResponse response = mapper.toResponseModel(service.createReceipt(request));
-
-        return new SuccessResponse<>(response, null);
+        return ResponseEntity.ok(response);
     }
 
     @PreAuthorize("hasAuthority('RECEIPT_UPDATE')")
     @PutMapping("/{receiptId}")
-    AbstractResponse updateReceipt(@PathVariable long receiptId,
-                                   @RequestBody ReceiptRequest request) {
+    ResponseEntity<?> updateReceipt(@PathVariable long receiptId,
+                                    @RequestBody ReceiptRequest request) {
         ReceiptResponse response = mapper.toResponseModel(service.updateReceipt(receiptId, request));
-
-        return new SuccessResponse<>(response, null);
+        return ResponseEntity.ok(response);
     }
 }

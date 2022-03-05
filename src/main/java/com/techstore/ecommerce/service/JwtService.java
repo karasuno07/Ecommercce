@@ -8,7 +8,7 @@ import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.impl.JWTParser;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.Payload;
-import com.techstore.ecommerce.object.entity.cache.RefreshToken;
+import com.techstore.ecommerce.object.model.RefreshToken;
 import com.techstore.ecommerce.object.entity.jpa.User;
 import com.techstore.ecommerce.object.model.AuthenticationInfo;
 import lombok.NonNull;

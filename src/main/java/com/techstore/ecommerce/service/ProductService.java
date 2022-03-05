@@ -1,14 +1,14 @@
 package com.techstore.ecommerce.service;
 
-import com.techstore.ecommerce.exception.ResourceNotFoundException;
+import com.techstore.ecommerce.object.exception.ResourceNotFoundException;
 import com.techstore.ecommerce.object.dto.filter.ProductFilter;
 import com.techstore.ecommerce.object.dto.request.ProductRequest;
 import com.techstore.ecommerce.object.entity.jpa.Brand;
 import com.techstore.ecommerce.object.entity.jpa.Category;
 import com.techstore.ecommerce.object.entity.jpa.Product;
 import com.techstore.ecommerce.object.entity.jpa.ProductDetail;
-import com.techstore.ecommerce.object.mapper.ProductDetailMapper;
-import com.techstore.ecommerce.object.mapper.ProductMapper;
+import com.techstore.ecommerce.object.dto.mapper.ProductDetailMapper;
+import com.techstore.ecommerce.object.dto.mapper.ProductMapper;
 import com.techstore.ecommerce.repository.ProductRepository;
 import com.techstore.ecommerce.repository.spec.ProductSpec;
 import lombok.RequiredArgsConstructor;

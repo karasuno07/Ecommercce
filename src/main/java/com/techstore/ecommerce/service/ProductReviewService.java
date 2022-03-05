@@ -1,11 +1,11 @@
 package com.techstore.ecommerce.service;
 
-import com.techstore.ecommerce.exception.ResourceNotFoundException;
+import com.techstore.ecommerce.object.exception.ResourceNotFoundException;
 import com.techstore.ecommerce.object.dto.request.ProductReviewRequest;
 import com.techstore.ecommerce.object.entity.jpa.Product;
 import com.techstore.ecommerce.object.entity.jpa.ProductReview;
 import com.techstore.ecommerce.object.entity.jpa.User;
-import com.techstore.ecommerce.object.mapper.ProductReviewMapper;
+import com.techstore.ecommerce.object.dto.mapper.ProductReviewMapper;
 import com.techstore.ecommerce.repository.ProductReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

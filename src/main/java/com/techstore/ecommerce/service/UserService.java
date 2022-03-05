@@ -1,11 +1,11 @@
 package com.techstore.ecommerce.service;
 
-import com.techstore.ecommerce.exception.ResourceNotFoundException;
+import com.techstore.ecommerce.object.exception.ResourceNotFoundException;
 import com.techstore.ecommerce.object.dto.filter.UserFilter;
 import com.techstore.ecommerce.object.dto.request.UserRequest;
 import com.techstore.ecommerce.object.entity.jpa.Role;
 import com.techstore.ecommerce.object.entity.jpa.User;
-import com.techstore.ecommerce.object.mapper.UserMapper;
+import com.techstore.ecommerce.object.dto.mapper.UserMapper;
 import com.techstore.ecommerce.repository.UserRepository;
 import com.techstore.ecommerce.repository.spec.UserSpec;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import javax.persistence.EntityExistsException;
 
 @Service

@@ -1,11 +1,11 @@
 package com.techstore.ecommerce.object.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.techstore.ecommerce.object.model.ProductProperty;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 @Data
 public class ProductDetailResponse {
@@ -17,7 +17,7 @@ public class ProductDetailResponse {
 
     private BigDecimal discount;
 
-    private Map<String, String> descriptions;
+    private ProductProperty descriptions;
 
     private List<String> images;
 }

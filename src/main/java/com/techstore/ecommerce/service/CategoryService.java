@@ -1,9 +1,9 @@
 package com.techstore.ecommerce.service;
 
-import com.techstore.ecommerce.exception.ResourceNotFoundException;
+import com.techstore.ecommerce.object.exception.ResourceNotFoundException;
 import com.techstore.ecommerce.object.dto.request.CategoryRequest;
 import com.techstore.ecommerce.object.entity.jpa.Category;
-import com.techstore.ecommerce.object.mapper.CategoryMapper;
+import com.techstore.ecommerce.object.dto.mapper.CategoryMapper;
 import com.techstore.ecommerce.object.model.Sorting;
 import com.techstore.ecommerce.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;

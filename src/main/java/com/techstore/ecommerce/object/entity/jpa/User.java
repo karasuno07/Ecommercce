@@ -12,7 +12,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
@@ -75,7 +74,7 @@ public class User implements UserDetails {
             return Collections.singleton(new SimpleGrantedAuthority("ROLE_CUSTOMER"));
         }
 
-        return Collections.singleton(new SimpleGrantedAuthority(role.getName()));
+        return Collections.singleton(new SimpleGrantedAuthority(role.getName().name()));
     }
 
     @Override

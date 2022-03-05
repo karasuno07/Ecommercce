@@ -1,17 +1,13 @@
 package com.techstore.ecommerce.service;
 
-import com.techstore.ecommerce.exception.ResourceNotFoundException;
-import com.techstore.ecommerce.object.dto.filter.ReceiptFilter;
+import com.techstore.ecommerce.object.exception.ResourceNotFoundException;
 import com.techstore.ecommerce.object.dto.request.ReceiptRequest;
 import com.techstore.ecommerce.object.entity.jpa.Receipt;
 import com.techstore.ecommerce.object.entity.jpa.ReceiptDetail;
-import com.techstore.ecommerce.object.mapper.ReceiptDetailMapper;
-import com.techstore.ecommerce.object.entity.jpa.ReceiptMapper;
+import com.techstore.ecommerce.object.dto.mapper.ReceiptDetailMapper;
+import com.techstore.ecommerce.object.dto.mapper.ReceiptMapper;
 import com.techstore.ecommerce.repository.ReceiptRepository;
-import com.techstore.ecommerce.repository.spec.ReceiptSpec;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

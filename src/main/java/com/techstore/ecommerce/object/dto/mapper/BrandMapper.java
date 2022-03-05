@@ -1,16 +1,14 @@
-package com.techstore.ecommerce.object.mapper;
+package com.techstore.ecommerce.object.dto.mapper;
 
 import com.techstore.ecommerce.object.dto.request.BrandRequest;
 import com.techstore.ecommerce.object.dto.response.BrandResponse;
 import com.techstore.ecommerce.object.entity.jpa.Brand;
 import com.techstore.ecommerce.util.CustomStringUtil;
-import org.mapstruct.AfterMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring",
-        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface BrandMapper {
 
     BrandResponse toResponseModel(Brand brand);

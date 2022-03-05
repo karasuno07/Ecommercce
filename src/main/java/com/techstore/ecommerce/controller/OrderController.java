@@ -1,16 +1,14 @@
 package com.techstore.ecommerce.controller;
 
 import com.techstore.ecommerce.object.constant.OrderStatus;
-import com.techstore.ecommerce.object.constant.SuccessMessage;
 import com.techstore.ecommerce.object.dto.filter.OrderFilter;
+import com.techstore.ecommerce.object.dto.mapper.OrderMapper;
 import com.techstore.ecommerce.object.dto.request.OrderRequest;
 import com.techstore.ecommerce.object.dto.response.OrderResponse;
-import com.techstore.ecommerce.object.mapper.OrderMapper;
-import com.techstore.ecommerce.object.wrapper.AbstractResponse;
-import com.techstore.ecommerce.object.wrapper.SuccessResponse;
 import com.techstore.ecommerce.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,72 +25,63 @@ public class OrderController {
 
     @PreAuthorize("hasAuthority('ORDER_READ')")
     @GetMapping
-    AbstractResponse getAllOrder(@RequestBody Optional<OrderFilter> filter) {
+    ResponseEntity<?> getAllOrder(@RequestBody Optional<OrderFilter> filter) {
         Page<OrderResponse> response = service.findAllOrders(
                 filter.orElse(new OrderFilter())).map(mapper::toResponseModel);
-
-        return new SuccessResponse<>(response, SuccessMessage.FIND_ALL_ORDERS.getMessage());
+        return ResponseEntity.ok(response);
     }
 
     @PreAuthorize("hasAuthority('ORDER_READ') OR hasRole('CUSTOMER')")
     @GetMapping("/{orderId}")
-    AbstractResponse getOrderById(@PathVariable int orderId) {
+    ResponseEntity<?> getOrderById(@PathVariable int orderId) {
         OrderResponse response = mapper.toResponseModel(service.findOrderById(orderId));
-        return new SuccessResponse<>(
-                response, SuccessMessage.FIND_ORDER_BY_ID.getMessage() + orderId);
+        return ResponseEntity.ok(response);
     }
 
     @PreAuthorize("hasAuthority('ORDER_CREATE') OR hasRole('CUSTOMER')")
     @PostMapping
-    AbstractResponse createOrder(@RequestBody @Valid OrderRequest request) {
+    ResponseEntity<?> createOrder(@RequestBody @Valid OrderRequest request) {
         OrderResponse response = mapper.toResponseModel(service.createOrder(request));
-        return new SuccessResponse<>(
-                response, SuccessMessage.CREATE_ORDER.getMessage());
+        return ResponseEntity.ok(response);
     }
 
     @PreAuthorize("hasAuthority('ORDER_UPDATE')")
     @PatchMapping("/{orderId}/pending")
-    AbstractResponse pendingOrderStatus(@PathVariable long orderId) {
+    ResponseEntity<?> pendingOrderStatus(@PathVariable long orderId) {
         service.deliveryOrder(orderId, OrderStatus.PENDING);
-        return new SuccessResponse<>(
-                null, SuccessMessage.UPDATE_STATUS.getMessage() + OrderStatus.PENDING.getStatus());
+        return ResponseEntity.ok().build();
     }
 
     @PreAuthorize("hasAuthority('ORDER_UPDATE')")
     @PatchMapping("/{orderId}/processed")
-    AbstractResponse processedOrderStatus(@PathVariable long orderId) {
+    ResponseEntity<?> processedOrderStatus(@PathVariable long orderId) {
         service.deliveryOrder(orderId, OrderStatus.PROCESSED);
-        return new SuccessResponse<>(
-                null, SuccessMessage.UPDATE_STATUS.getMessage() + OrderStatus.PROCESSED.getStatus());
+        return ResponseEntity.ok().build();
     }
 
     @PreAuthorize("hasAuthority('ORDER_UPDATE')")
     @PatchMapping("/{orderId}/delivering")
-    AbstractResponse deliveringOrderStatus(@PathVariable long orderId) {
+    ResponseEntity<?> deliveringOrderStatus(@PathVariable long orderId) {
         service.deliveryOrder(orderId, OrderStatus.DELIVERING);
-        return new SuccessResponse<>(
-                null, SuccessMessage.UPDATE_STATUS.getMessage() + OrderStatus.DELIVERING.getStatus());
+        return ResponseEntity.ok().build();
     }
 
     @PatchMapping("/{orderId}/received")
-    AbstractResponse receivedOrderStatus(@PathVariable long orderId) {
+    ResponseEntity<?> receivedOrderStatus(@PathVariable long orderId) {
         service.deliveryOrder(orderId, OrderStatus.RECEIVED);
-        return new SuccessResponse<>(
-                null, SuccessMessage.UPDATE_STATUS.getMessage() + OrderStatus.RECEIVED.getStatus());
+        return ResponseEntity.ok().build();
     }
 
     @PatchMapping("/{orderId}/declined")
-    AbstractResponse declinedOrderStatus(@PathVariable long orderId) {
+    ResponseEntity<?> declinedOrderStatus(@PathVariable long orderId) {
         service.deliveryOrder(orderId, OrderStatus.DECLINED);
-        return new SuccessResponse<>(
-                null, SuccessMessage.UPDATE_STATUS.getMessage() + OrderStatus.DECLINED.getStatus());
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{orderId}")
-    AbstractResponse deleteOrder(@PathVariable int orderId) {
+    ResponseEntity<?> deleteOrder(@PathVariable int orderId) {
         service.deleteOrder(orderId);
-        return new SuccessResponse<>(
-                null, SuccessMessage.DELETE_ORDER.getMessage());
+        return ResponseEntity.ok().build();
     }
 
 

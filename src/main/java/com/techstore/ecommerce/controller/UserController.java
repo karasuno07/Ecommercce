@@ -1,16 +1,13 @@
 package com.techstore.ecommerce.controller;
 
-import com.techstore.ecommerce.object.constant.SuccessMessage;
 import com.techstore.ecommerce.object.dto.filter.UserFilter;
+import com.techstore.ecommerce.object.dto.mapper.UserMapper;
 import com.techstore.ecommerce.object.dto.request.UserRequest;
 import com.techstore.ecommerce.object.dto.response.UserResponse;
-import com.techstore.ecommerce.object.mapper.UserMapper;
-import com.techstore.ecommerce.object.wrapper.AbstractResponse;
-import com.techstore.ecommerce.object.wrapper.SuccessResponse;
 import com.techstore.ecommerce.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,53 +24,51 @@ public class UserController {
 
     @PreAuthorize("hasAuthority('USER_READ')")
     @GetMapping
-    AbstractResponse getAllUser(@RequestBody Optional<UserFilter> filter) {
+    ResponseEntity<?> getAllUser(@RequestBody Optional<UserFilter> filter) {
         Page<UserResponse> response =
                 service.findAllUsers(filter.orElse(new UserFilter())).map(mapper::toResponseModel);
 
-        return new SuccessResponse<>(response, SuccessMessage.FIND_ALL_USERS.getMessage());
+        return ResponseEntity.ok(response);
     }
 
     @PreAuthorize("hasAuthority('USER_READ') OR hasRole('CUSTOMER')")
     @GetMapping("/{userId}")
-    AbstractResponse getUserById(@PathVariable int userId) {
+    ResponseEntity<?> getUserById(@PathVariable int userId) {
         UserResponse response = mapper.toResponseModel(service.findUserById(userId));
-        return new SuccessResponse<>(response, SuccessMessage.FIND_USER_BY_ID.getMessage() + userId);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/_search/{username}")
-    AbstractResponse getUserByUsername(@PathVariable String username) {
+    ResponseEntity<?> getUserByUsername(@PathVariable String username) {
         boolean valid = service.validateUsername(username);
-
-        return new SuccessResponse<>(valid, null);
+        return ResponseEntity.ok(valid);
     }
 
-//    @PreAuthorize("hasAuthority('USER_CREATE')")
+    //    @PreAuthorize("hasAuthority('USER_CREATE')")
     @PostMapping
-    AbstractResponse createUser(@RequestBody @Valid UserRequest request) {
+    ResponseEntity<?> createUser(@RequestBody @Valid UserRequest request) {
         UserResponse response = mapper.toResponseModel(service.createUser(request));
-        return new SuccessResponse<>(
-                response, HttpStatus.CREATED.value(), SuccessMessage.CREATE_USER.getMessage());
+        return ResponseEntity.ok(response);
     }
 
     @PreAuthorize("hasAuthority('USER_UPDATE') OR hasRole('CUSTOMER')")
     @PutMapping("/{userId}")
-    AbstractResponse updateUser(@PathVariable int userId, @RequestBody @Valid UserRequest request) {
+    ResponseEntity<?> updateUser(@PathVariable int userId, @RequestBody @Valid UserRequest request) {
         UserResponse response = mapper.toResponseModel(service.updateUser(userId, request));
-        return new SuccessResponse<>(response, SuccessMessage.UPDATE_USER.getMessage());
+        return ResponseEntity.ok(response);
     }
 
     @PreAuthorize("hasAuthority('USER_UPDATE')")
     @PatchMapping("/{userId}/activate")
-    AbstractResponse activateUser(@PathVariable long userId) {
+    ResponseEntity<?> activateUser(@PathVariable long userId) {
         service.activateUser(userId);
-        return new SuccessResponse<>(null, SuccessMessage.ACTIVATE_USER.getMessage());
+        return ResponseEntity.ok().build();
     }
 
     @PreAuthorize("hasAuthority('USER_UPDATE')")
     @PatchMapping("/{userId}/deactivate")
-    AbstractResponse deactivateUser(@PathVariable long userId) {
+    ResponseEntity<?> deactivateUser(@PathVariable long userId) {
         service.deactivateUser(userId);
-        return new SuccessResponse<>(null, SuccessMessage.DEACTIVATE_USER.getMessage());
+        return ResponseEntity.ok().build();
     }
 }

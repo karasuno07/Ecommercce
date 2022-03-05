@@ -1,6 +1,5 @@
-package com.techstore.ecommerce.object.mapper;
+package com.techstore.ecommerce.object.dto.mapper;
 
-import com.techstore.ecommerce.object.entity.jpa.Order;
 import com.techstore.ecommerce.object.entity.jpa.Order;
 import com.techstore.ecommerce.object.model.Address;
 import com.techstore.ecommerce.object.model.FullName;

@@ -1,15 +1,12 @@
 package com.techstore.ecommerce.object.entity.jpa;
 
-import com.vladmihalcea.hibernate.type.array.ListArrayType;
+import com.techstore.ecommerce.object.constant.SystemRole;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name = "roles")
@@ -23,6 +20,7 @@ public class Role implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_seq")
     private long id;
 
-    @Column(columnDefinition = "varchar(50)", nullable = false)
-    private String name;
+    @Column(columnDefinition = "varchar(255)", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private SystemRole name;
 }

@@ -1,11 +1,14 @@
 package com.techstore.ecommerce.object.entity.jpa;
 
+import com.techstore.ecommerce.object.model.ProductProperty;
 import com.vladmihalcea.hibernate.type.array.ListArrayType;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -13,11 +16,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "product_details")
-@TypeDef(name = "list-array", typeClass = ListArrayType.class) //định nghĩa kiểu dữ liệu
+@TypeDefs({@TypeDef(name = "list-array", typeClass = ListArrayType.class),
+        @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)})
 @Getter
 @Setter
 @ToString
-@SequenceGenerator(name = "product_details_id_seq", sequenceName = "product_details_id_seq", allocationSize = 1)
+@SequenceGenerator(name = "product_details_id_seq", sequenceName = "product_details_id_seq",
+        allocationSize = 1)
 public class ProductDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_details_id_seq")
@@ -32,13 +37,14 @@ public class ProductDetail {
     @Column(nullable = false)
     private BigDecimal discount;
 
+    @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb", nullable = false)
-    private String descriptions;
+    private ProductProperty descriptions;
 
     private boolean isDefault = false;
 
     @Type(type = "list-array")
-    @Column(columnDefinition = "text[]", nullable = false)
+    @Column(columnDefinition = "text[]")
     private List<String> images;
 
     @ToString.Exclude

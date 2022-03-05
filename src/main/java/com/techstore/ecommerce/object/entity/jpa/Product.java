@@ -1,6 +1,8 @@
 package com.techstore.ecommerce.object.entity.jpa;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -43,4 +45,14 @@ public class Product {
     @ToString.Exclude
     @OneToMany(mappedBy = "product")
     private List<ProductReview> reviews;
+
+    public void setDetails(List<ProductDetail> details) {
+        details.forEach(detail -> detail.setProduct(this));
+        this.details = details;
+    }
+
+    public void setReviews(List<ProductReview> reviews) {
+        reviews.forEach(review -> review.setProduct(this));
+        this.reviews = reviews;
+    }
 }

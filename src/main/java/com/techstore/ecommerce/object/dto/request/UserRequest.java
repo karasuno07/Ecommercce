@@ -45,7 +45,7 @@ public class UserRequest {
 
     //    @NotNull(message = "null")
     @NotSupportedImageType(message = "invalid content type")
-    private MultipartFile image;
+    private MultipartFile imageFile;
 
     @JsonProperty("role_id")
     @NotNull(message = "null")

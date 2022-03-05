@@ -1,4 +1,4 @@
-package com.techstore.ecommerce.object.entity.cache;
+package com.techstore.ecommerce.object.model;
 
 import com.techstore.ecommerce.object.entity.jpa.User;
 import lombok.Data;

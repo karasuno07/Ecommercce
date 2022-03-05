@@ -1,4 +1,4 @@
-package com.techstore.ecommerce.object.mapper;
+package com.techstore.ecommerce.object.dto.mapper;
 
 import com.techstore.ecommerce.object.dto.request.UserRequest;
 import com.techstore.ecommerce.object.dto.response.UserResponse;
@@ -9,23 +9,22 @@ import com.techstore.ecommerce.object.model.FullName;
 import org.mapstruct.*;
 
 @Mapper(componentModel = "spring",
-        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface UserMapper {
 
-    @Mapping(target = "roleName", expression = "java(user.getRole().getName())")
+    @Mapping(target = "roleName", source = "role.name")
     UserResponse toResponseModel(User user);
 
-    @Mapping(target = "roleName", expression = "java(user.getRole().getName())")
+    @Mapping(target = "roleName", source = "role.name")
     AuthenticationInfo toAuthInfo(User user);
 
     @Mapping(target = "fullName", ignore = true)
     @Mapping(target = "address", ignore = true)
-    @Mapping(target = "image", ignore = true)
     User createEntityFromRequest(UserRequest request);
 
     @Mapping(target = "fullName", ignore = true)
     @Mapping(target = "address", ignore = true)
-    @Mapping(target = "image", ignore = true)
     void update(@MappingTarget User user, UserRequest request);
 
     @AfterMapping

@@ -1,4 +1,4 @@
-package com.techstore.ecommerce.object.mapper;
+package com.techstore.ecommerce.object.dto.mapper;
 
 import com.techstore.ecommerce.object.dto.request.CategoryRequest;
 import com.techstore.ecommerce.object.dto.response.CategoryResponse;
@@ -7,7 +7,8 @@ import com.techstore.ecommerce.util.CustomStringUtil;
 import org.mapstruct.*;
 
 @Mapper(componentModel = "spring",
-        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CategoryMapper {
 
     CategoryResponse toResponseModel(Category category);

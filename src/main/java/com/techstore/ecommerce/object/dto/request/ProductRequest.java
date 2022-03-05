@@ -22,9 +22,6 @@ public class ProductRequest {
     @NotNull(message = "null")
     private int brandId;
 
-    @JsonProperty("is_default")
-    private boolean isDefault;
-
     @NotEmpty(message = "empty")
     private List<ProductDetailRequest> details;
 }

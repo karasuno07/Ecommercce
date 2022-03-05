@@ -44,7 +44,7 @@ create table suppliers
 create table roles
 (
     id          bigserial      not null primary key,
-    name        varchar(50) not null
+    name        varchar(255) not null
 );
 
 --USERS
@@ -84,10 +84,10 @@ create table products
 --PRODUCT DETAILS
 create table product_details
 (
-    id           bigserial         not null primary key,
+    id           bigserial      not null primary key,
     descriptions jsonb          not null,
     discount     numeric(19, 2) not null,
-    images       text[]         not null,
+    images       text[],
     in_stock     integer        not null,
     is_default   boolean        not null,
     price        numeric(19, 2) not null,
@@ -153,7 +153,7 @@ create table orders
     order_code         text         not null,
     phone_number       varchar(12)  not null,
     recipient_name     varchar(100) not null,
-    status             varchar(20)  not null,
+    status             varchar(255)  not null,
     customer_id        bigint
         constraint fksjfs85qf6vmcurlx43cnc16gy
             references users

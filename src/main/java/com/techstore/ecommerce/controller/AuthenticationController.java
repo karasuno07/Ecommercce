@@ -1,15 +1,14 @@
 package com.techstore.ecommerce.controller;
 
+import com.techstore.ecommerce.object.dto.mapper.UserMapper;
 import com.techstore.ecommerce.object.dto.request.AuthRequest;
 import com.techstore.ecommerce.object.dto.response.TokenResponse;
 import com.techstore.ecommerce.object.dto.response.UserResponse;
-import com.techstore.ecommerce.object.entity.cache.RefreshToken;
+import com.techstore.ecommerce.object.model.RefreshToken;
 import com.techstore.ecommerce.object.entity.jpa.User;
-import com.techstore.ecommerce.object.mapper.UserMapper;
-import com.techstore.ecommerce.object.wrapper.AbstractResponse;
-import com.techstore.ecommerce.object.wrapper.SuccessResponse;
 import com.techstore.ecommerce.service.JwtService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -27,7 +26,7 @@ public class AuthenticationController {
     private final UserMapper mapper;
 
     @PostMapping("/login")
-    AbstractResponse createAccessToken(@RequestBody AuthRequest request) {
+    ResponseEntity<?> createAccessToken(@RequestBody AuthRequest request) {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(
                         request.getUsername(),
@@ -42,11 +41,11 @@ public class AuthenticationController {
 
         TokenResponse response = new TokenResponse(accessToken, refreshToken.getToken(),
                                                    mapper.toResponseModel(user));
-        return new SuccessResponse<>(response, "Login successfully");
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/refresh-token/{token}")
-    AbstractResponse getNewAccessToken(@PathVariable String token) {
+    ResponseEntity<?> getNewAccessToken(@PathVariable String token) {
         RefreshToken refreshToken = jwtService.verifyExpiration(token);
 
         String newAccessToken = jwtService.generateAccessToken(refreshToken.getUser());
@@ -55,6 +54,6 @@ public class AuthenticationController {
         TokenResponse response = new TokenResponse(newAccessToken,
                                                    refreshToken.getToken(), userInfo);
 
-        return new SuccessResponse<>(response, "Get token successfully");
+        return ResponseEntity.ok(response);
     }
 }

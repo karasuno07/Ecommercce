@@ -1,5 +1,6 @@
 package com.techstore.ecommerce.object.entity.jpa;
 
+import com.techstore.ecommerce.object.constant.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -47,7 +48,8 @@ public class Order {
     private Date lastReceiveDate;
 
     @Column(columnDefinition = "varchar(20)", nullable = false)
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)

@@ -1,4 +1,4 @@
-package com.techstore.ecommerce.object.mapper;
+package com.techstore.ecommerce.object.dto.mapper;
 
 import com.techstore.ecommerce.object.dto.request.SupplierRequest;
 import com.techstore.ecommerce.object.dto.response.SupplierResponse;
@@ -7,7 +7,8 @@ import com.techstore.ecommerce.object.model.Address;
 import org.mapstruct.*;
 
 @Mapper(componentModel = "spring",
-        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface SupplierMapper {
 
     SupplierResponse toResponseModel(Supplier supplier);

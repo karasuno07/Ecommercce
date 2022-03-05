@@ -1,9 +1,9 @@
 package com.techstore.ecommerce.service;
 
-import com.techstore.ecommerce.exception.ResourceNotFoundException;
+import com.techstore.ecommerce.object.exception.ResourceNotFoundException;
 import com.techstore.ecommerce.object.dto.request.BrandRequest;
 import com.techstore.ecommerce.object.entity.jpa.Brand;
-import com.techstore.ecommerce.object.mapper.BrandMapper;
+import com.techstore.ecommerce.object.dto.mapper.BrandMapper;
 import com.techstore.ecommerce.repository.BrandRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
