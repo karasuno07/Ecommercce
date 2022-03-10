@@ -14,11 +14,9 @@ public class ProductRequest {
     @NotBlank(message = "blank")
     private String name;
 
-    @JsonProperty("category_id")
     @NotNull(message = "null")
     private int categoryId;
 
-    @JsonProperty("brand_id")
     @NotNull(message = "null")
     private int brandId;
 

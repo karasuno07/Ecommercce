@@ -5,6 +5,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -47,7 +49,10 @@ public class Product {
     private List<ProductReview> reviews;
 
     public void setDetails(List<ProductDetail> details) {
-        details.forEach(detail -> detail.setProduct(this));
+        details.forEach(detail -> {
+            detail.setProduct(this);
+            detail.setImages(Arrays.asList("img", "img1", "img2"));
+        });
         this.details = details;
     }
 

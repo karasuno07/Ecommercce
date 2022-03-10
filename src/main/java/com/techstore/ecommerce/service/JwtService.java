@@ -49,8 +49,7 @@ public class JwtService {
         Map<String, Object> payload = new HashMap<>();
         payload.put("id", user.getId());
         payload.put("username", user.getUsername());
-        payload.put("role", user.getRole().getName());
-        payload.put("permissions", user.getRole().getName());
+        payload.put("role", user.getRole().getName().toString());
 
         JWTCreator.Builder builder = JWT.create();
         builder.withKeyId(UUID.randomUUID().toString());

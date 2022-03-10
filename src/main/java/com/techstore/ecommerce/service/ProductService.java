@@ -30,10 +30,10 @@ public class ProductService {
 
     private final BrandService brandService;
     private final CategoryService categoryService;
+    private final CloudinaryService cloudinaryService;
 
-    public Page<Product> findAllProducts(ProductFilter filter) {
-        Specification<Product> specification = ProductSpec.getSpecification(filter);
-        return productRepo.findAll(specification, filter.getPagination().getPageAndSort());
+    public List<Product> findAllProducts() {
+        return productRepo.findAll();
     }
 
     public Product findProductById(long id) {
@@ -43,14 +43,14 @@ public class ProductService {
 
     public Product createProduct(ProductRequest request) {
         Product product = productMapper.createEntityFromRequest(request);
-        validateProduct(product);
+        uploadImg(request);
         return saveProduct(product, request);
     }
 
     public Product updateProduct(long id, ProductRequest request) {
         Product product = findProductById(id);
         productMapper.update(product, request);
-        validateProduct(product);
+        uploadImg(request);
         return saveProduct(product, request);
     }
 
@@ -67,11 +67,12 @@ public class ProductService {
         return productRepo.save(product);
     }
 
-    public void validateProduct(Product product) {
-        boolean existing = productRepo.existsByName(product.getName());
-        if (existing) {
-            throw new EntityExistsException("Product name " + product.getName() + " already exists");
-        }
+    public void uploadImg(ProductRequest request){
+        request.getDetails().forEach(productDetail -> {
+            if(!productDetail.getImageFiles().isEmpty()){
+                productDetail.getImageFiles().forEach(img -> cloudinaryService.uploadImage(null, img));
+            }
+        });
     }
 
     public void activateProduct(long id) {

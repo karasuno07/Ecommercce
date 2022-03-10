@@ -16,7 +16,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/products")
@@ -32,11 +34,9 @@ public class ProductController {
 
     //    @PreAuthorize("hasAuthority('PRODUCT_READ') OR hasRole('CUSTOMER')")
     @GetMapping
-    ResponseEntity<?> getAllProduct(@RequestBody Optional<ProductFilter> filter) {
-        System.out.println("filter: " + filter);
-        Page<ProductResponse> response = productService.findAllProducts(
-                filter.orElse(new ProductFilter())).map(productMapper::toResponseModel);
-
+    ResponseEntity<?> getAllProduct() {
+        List<ProductResponse> response = productService.findAllProducts()
+                .stream().map(productMapper::toResponseModel).collect(Collectors.toList());
         return ResponseEntity.ok(response);
     }
 

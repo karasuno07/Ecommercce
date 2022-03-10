@@ -13,14 +13,10 @@ import java.util.List;
 @Data
 public class ProductDetailRequest {
 
-    @JsonProperty("is_default")
     private boolean isDefault;
 
-    @JsonProperty("product_id")
-//    @NotNull(message = "null")
     private int productId;
 
-    @JsonProperty("in_stock")
     @NotNull(message = "null")
     private int inStock;
 
@@ -33,6 +29,5 @@ public class ProductDetailRequest {
     @NotEmpty(message = "empty")
     private ProductProperty descriptions;
 
-    @NotEmpty(message = "empty")
     private List<MultipartFile> imageFiles;
 }
