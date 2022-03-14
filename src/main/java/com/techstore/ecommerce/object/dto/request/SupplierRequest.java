@@ -13,10 +13,10 @@ public class SupplierRequest {
     @NotNull(message = "null")
     private String name;
 
-    @NotBlank(message = "blank")
+//    @NotBlank(message = "blank")
     private Address address;
 
-    @JsonProperty("phone_number")
+//    @JsonProperty("phone_number")
     @NotBlank(message = "blank")
     private String phoneNumber;
 

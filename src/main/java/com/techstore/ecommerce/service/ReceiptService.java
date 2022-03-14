@@ -5,7 +5,7 @@ import com.techstore.ecommerce.object.dto.request.ReceiptRequest;
 import com.techstore.ecommerce.object.entity.jpa.Receipt;
 import com.techstore.ecommerce.object.entity.jpa.ReceiptDetail;
 import com.techstore.ecommerce.object.dto.mapper.ReceiptDetailMapper;
-import com.techstore.ecommerce.object.dto.mapper.ReceiptMapper;
+import com.techstore.ecommerce.object.entity.jpa.ReceiptMapper;
 import com.techstore.ecommerce.repository.ReceiptRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

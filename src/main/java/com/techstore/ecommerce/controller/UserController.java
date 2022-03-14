@@ -4,6 +4,8 @@ import com.techstore.ecommerce.object.dto.filter.UserFilter;
 import com.techstore.ecommerce.object.dto.mapper.UserMapper;
 import com.techstore.ecommerce.object.dto.request.UserRequest;
 import com.techstore.ecommerce.object.dto.response.UserResponse;
+import com.techstore.ecommerce.object.model.Address;
+import com.techstore.ecommerce.object.model.FullName;
 import com.techstore.ecommerce.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,16 +24,15 @@ public class UserController {
     private final UserService service;
     private final UserMapper mapper;
 
-    @PreAuthorize("hasAuthority('USER_READ')")
+//    @PreAuthorize("hasAuthority('USER_READ')")
     @GetMapping
     ResponseEntity<?> getAllUser(@RequestBody Optional<UserFilter> filter) {
         Page<UserResponse> response =
                 service.findAllUsers(filter.orElse(new UserFilter())).map(mapper::toResponseModel);
-
         return ResponseEntity.ok(response);
     }
 
-    @PreAuthorize("hasAuthority('USER_READ') OR hasRole('CUSTOMER')")
+//    @PreAuthorize("hasAuthority('USER_READ') OR hasRole('CUSTOMER')")
     @GetMapping("/{userId}")
     ResponseEntity<?> getUserById(@PathVariable int userId) {
         UserResponse response = mapper.toResponseModel(service.findUserById(userId));
@@ -46,26 +47,29 @@ public class UserController {
 
     //    @PreAuthorize("hasAuthority('USER_CREATE')")
     @PostMapping
-    ResponseEntity<?> createUser(@RequestBody @Valid UserRequest request) {
+    ResponseEntity<?> createUser(@ModelAttribute UserRequest request) {
+        request.setAddress(new Address(request.getStreet(), request.getWard(), request.getDistrict(), request.getCity()));
+        request.setFullName(new FullName(request.getFirstName(), request.getLastName()));
+        System.out.println(request.getFirstName() +" "+ request.getLastName());
         UserResponse response = mapper.toResponseModel(service.createUser(request));
         return ResponseEntity.ok(response);
     }
 
-    @PreAuthorize("hasAuthority('USER_UPDATE') OR hasRole('CUSTOMER')")
+//    @PreAuthorize("hasAuthority('USER_UPDATE') OR hasRole('CUSTOMER')")
     @PutMapping("/{userId}")
     ResponseEntity<?> updateUser(@PathVariable int userId, @RequestBody @Valid UserRequest request) {
         UserResponse response = mapper.toResponseModel(service.updateUser(userId, request));
         return ResponseEntity.ok(response);
     }
 
-    @PreAuthorize("hasAuthority('USER_UPDATE')")
+//    @PreAuthorize("hasAuthority('USER_UPDATE')")
     @PatchMapping("/{userId}/activate")
     ResponseEntity<?> activateUser(@PathVariable long userId) {
         service.activateUser(userId);
         return ResponseEntity.ok().build();
     }
 
-    @PreAuthorize("hasAuthority('USER_UPDATE')")
+//    @PreAuthorize("hasAuthority('USER_UPDATE')")
     @PatchMapping("/{userId}/deactivate")
     ResponseEntity<?> deactivateUser(@PathVariable long userId) {
         service.deactivateUser(userId);

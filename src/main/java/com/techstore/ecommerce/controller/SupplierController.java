@@ -21,7 +21,7 @@ public class SupplierController {
     private final SupplierService service;
     private final SupplierMapper mapper;
 
-    @PreAuthorize("hasAuthority('SUPPLIER_READ')")
+//    @PreAuthorize("hasAuthority('SUPPLIER_READ')")
     @GetMapping
     ResponseEntity<?> getAllSupplier() {
         List<SupplierResponse> response = service.findAllSuppliers().stream()
@@ -30,21 +30,22 @@ public class SupplierController {
         return ResponseEntity.ok(response);
     }
 
-    @PreAuthorize("hasAuthority('SUPPLIER_READ')")
+//    @PreAuthorize("hasAuthority('SUPPLIER_READ')")
     @GetMapping("/{supplierId}")
     ResponseEntity<?> getSupplierById(@PathVariable int supplierId) {
         SupplierResponse response = mapper.toResponseModel(service.findSupplierById(supplierId));
         return ResponseEntity.ok(response);
     }
 
-    @PreAuthorize("hasAuthority('SUPPLIER_CREATE')")
+//    @PreAuthorize("hasAuthority('SUPPLIER_CREATE')")
     @PostMapping
     ResponseEntity<?> createSupplier(@RequestBody @Valid SupplierRequest request) {
+        System.out.println("vào post");
         SupplierResponse response = mapper.toResponseModel(service.createSupplier(request));
         return ResponseEntity.ok(response);
     }
 
-    @PreAuthorize("hasAuthority('SUPPLIER_UPDATE')")
+//    @PreAuthorize("hasAuthority('SUPPLIER_UPDATE')")
     @PutMapping("/{supplierId}")
     ResponseEntity<?> updateSupplier(@PathVariable int supplierId,
                                      @RequestBody @Valid SupplierRequest request) {
@@ -52,7 +53,7 @@ public class SupplierController {
         return ResponseEntity.ok(response);
     }
 
-    @PreAuthorize("hasAuthority('SUPPLIER_DELETE')")
+//    @PreAuthorize("hasAuthority('SUPPLIER_DELETE')")
     @DeleteMapping("/{supplierId}")
     ResponseEntity<?> deleteSupplier(@PathVariable long supplierId) {
         service.deleteSupplier(supplierId);

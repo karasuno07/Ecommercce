@@ -2,7 +2,7 @@ package com.techstore.ecommerce.controller;
 
 import com.techstore.ecommerce.object.dto.request.ReceiptRequest;
 import com.techstore.ecommerce.object.dto.response.ReceiptResponse;
-import com.techstore.ecommerce.object.dto.mapper.ReceiptMapper;
+import com.techstore.ecommerce.object.entity.jpa.ReceiptMapper;
 import com.techstore.ecommerce.service.ReceiptService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

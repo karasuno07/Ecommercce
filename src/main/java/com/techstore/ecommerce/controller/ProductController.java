@@ -50,6 +50,7 @@ public class ProductController {
 //    @PreAuthorize("hasAuthority('PRODUCT_CREATE')")
     @PostMapping
     ResponseEntity<?> createProduct(@RequestBody @Valid ProductRequest request) {
+        System.out.println(request.getDetails());
         ProductResponse response = productMapper.toResponseModel(productService.createProduct(request));
         return ResponseEntity.ok(response);
     }

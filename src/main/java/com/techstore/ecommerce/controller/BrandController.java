@@ -47,7 +47,7 @@ public class BrandController {
     //@PreAuthorize("hasAuthority('BRAND_UPDATE')")
     @PutMapping("/{brandId}")
     ResponseEntity<?> updateBrand(
-            @PathVariable int brandId, @RequestBody @Valid BrandRequest request) {
+            @PathVariable int brandId, @ModelAttribute @Valid BrandRequest request) {
         BrandResponse response = mapper.toResponseModel(service.updateBrand(brandId, request));
         return ResponseEntity.ok(response);
     }

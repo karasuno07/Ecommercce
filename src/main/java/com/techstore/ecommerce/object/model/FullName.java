@@ -1,18 +1,14 @@
 package com.techstore.ecommerce.object.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 
 @Data
+@AllArgsConstructor
 public class FullName {
-
-    @JsonProperty("first_name")
-    @NotBlank(message = "blank")
     private String firstName;
-
-    @JsonProperty("last_name")
-    @NotBlank(message = "blank")
     private String lastName;
 }

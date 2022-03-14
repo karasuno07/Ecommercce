@@ -69,7 +69,7 @@ public class ProductService {
 
     public void uploadImg(ProductRequest request){
         request.getDetails().forEach(productDetail -> {
-            if(!productDetail.getImageFiles().isEmpty()){
+            if(productDetail.getImageFiles() != null){
                 productDetail.getImageFiles().forEach(img -> cloudinaryService.uploadImage(null, img));
             }
         });
